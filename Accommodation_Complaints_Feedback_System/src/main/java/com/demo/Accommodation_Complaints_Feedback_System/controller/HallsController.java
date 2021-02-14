@@ -1,10 +1,14 @@
 package com.demo.Accommodation_Complaints_Feedback_System.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.Accommodation_Complaints_Feedback_System.dao.ServiceHalls;
@@ -12,6 +16,7 @@ import com.demo.Accommodation_Complaints_Feedback_System.model.Admin;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Carpenter;
 import com.demo.Accommodation_Complaints_Feedback_System.model.CarpentersComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Student;
+import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 import com.demo.Accommodation_Complaints_Feedback_System.model.DoneComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.AcceptedComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.RejectedComplaint;
@@ -38,6 +43,45 @@ public class HallsController {
 		return "login.jsp";
 	}
 	
+	
+	@PostMapping("/register_user")
+	String addStudent(User user) {
+		
+		service.saveUser(user);
+		return "login.jsp";
+	}
+	
+	@RequestMapping(value="admin/users.jsp/approved/{userId}", method=RequestMethod.GET)
+		public String approve(@PathVariable("userId") int userId, Map<String, Object> map) {
+		
+		User user = service.getUser(userId);
+		user.setUser_status("approved");
+		service.saveUser(user);
+		
+		return "redirect:/admin/users.jsp";
+		
+	}
+	
+	@RequestMapping(value="admin/users.jsp/unapproved/{userId}", method=RequestMethod.GET)
+	public String unapprove(@PathVariable("userId") int userId, Map<String, Object> map) {
+	
+		User user = service.getUser(userId);
+		user.setUser_status("unapproved");
+		service.saveUser(user);
+		
+		return "redirect:/admin/users.jsp";
+	
+	}
+	
+	
+	@RequestMapping(value="admin/users.jsp/delete/{userId}", method=RequestMethod.GET)
+	public String delete(@PathVariable("userId") int userId, Map<String, Object> map) {
+		service.deleteUser(userId);
+		return "redirect:/admin/users.jsp";
+	
+	}
+	
+	
 	@PostMapping("/studentRegister")
 	String addStudent(Student student) {
 		
@@ -54,7 +98,7 @@ public class HallsController {
 				
 				if(admin!=null) {
 					model.addAttribute("admin", admin);
-					return "adminUI.jsp";
+					return "admin/adminUI.jsp";
 				}
 				else {
 					return "login.jsp";

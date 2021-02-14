@@ -1,13 +1,23 @@
 package com.demo.Accommodation_Complaints_Feedback_System.dao;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.Accommodation_Complaints_Feedback_System.repository.AcceptedComplaintRepository;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.AdminRepository;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.CarpenterRepository;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.CarpentersComplaintRepository;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.StudentRepository;
+import com.demo.Accommodation_Complaints_Feedback_System.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.demo.Accommodation_Complaints_Feedback_System.model.DoneComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.RejectedComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Security;
@@ -39,6 +49,7 @@ import com.demo.Accommodation_Complaints_Feedback_System.model.Admin;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Carpenter;
 import com.demo.Accommodation_Complaints_Feedback_System.model.CarpentersComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Student;
+import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 
 
 @Service
@@ -46,6 +57,9 @@ public class ServiceHalls {
 	
 	@Autowired
 	StudentRepository srepo;
+	
+	@Autowired
+	UserRepository user_repository;
 	
 	@Autowired
 	AdminRepository arepo;
@@ -97,6 +111,32 @@ public class ServiceHalls {
 	
 	@Autowired
 	DoneComplaintRepository dcrepo;
+	 
+	@Autowired
+	ObjectMapper objectMapper;
+	
+	public void saveUser(User user) {
+	 	user_repository.save(user);
+	}
+	
+	public User getUser(String username, String password) {
+		return user_repository.findByUsernameAndPassword(username, password);
+	}
+	
+	public User getUser(int user_id) {
+		return user_repository.findById(user_id);
+	}
+	
+	
+	public void deleteUser(int user_id) {
+		user_repository.deleteById(user_id);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

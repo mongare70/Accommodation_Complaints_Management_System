@@ -59,5 +59,4 @@ li a:hover:not(.active) {
      <li><a href="RejectedComplaints.jsp" target="_parent">Rejected Complaints</a></li>
    </ul>
 </div>
- </body>
- </html>
+<%@ include file="/includes/footer.jsp" %>
