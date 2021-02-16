@@ -33,7 +33,7 @@
 			            
 			            <option value="student">Student</option>
 			            <option value="halls_officer">Halls Officer</option>
-			            <option value="custodianr">Custodian</option>
+			            <option value="custodian">Custodian</option>
 			            <option value="carpenter">Carpenter</option>
 			            <option value="electrician">Electrician</option>
 			            <option value="plumber">Plumber</option>

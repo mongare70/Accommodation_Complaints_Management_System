@@ -1,31 +1,40 @@
-<%@ include file="/includes/header.jsp" %>
+<%@ include file="/admin/includes/admin_header.jsp" %>
+<%@ include file="/admin/includes/admin_navigation.jsp" %>
 <div class="container-fluid bg">
-		<div class="row">
-            <div class="col-md-2 col-sm-4 col-xs-12"></div>
-			<div class="col-md-2 col-sm-4 col-xs-12"></div>
-				<!-- Form Start -->
-            <form class="form-container" method="post" action="/carpenterRegister" name="carpenter_registration_form" id="carpenter_registration_form" onsubmit="return validateForm()">
-                <h1>Carpenter Registration Form</h1>
+		<div class="container">
+			<!-- Form Start -->
+            <form class="form-container" method="post" action="/register_admin" name="admin_registration_form" id="admin_registration_form" onsubmit="return validateForm()">
+                <h1>Admin Registration Form</h1>
                 <div class="form-group">
-                    <label for="staffNo">Staff Number:</label>
-                    <input type="text" class="form-control" id="staffNo" name="staffNo" placeholder="Staff Number">
+                    <label for="user_number">Staff Number/Registration Number:</label>
+                    <input type="text" class="form-control" id="user_number" name="user_number" placeholder="Staff Number/Registration Number">
                 </div>
                 <div class="form-group">
-                    <label for="fname">First Name:</label>
-                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+                    <label for="user_firstname">Firstname:</label>
+                    <input type="text" class="form-control" id="user_firstname" name="user_firstname" placeholder="Firstname">
                 </div>
                 <div class="form-group">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+                    <label for="user_lastname">Lastname:</label>
+                    <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Lastname">
                 </div>
                 <div class="form-group">
                     <label for="uname">Username:</label>
-                    <input type="text" class="form-control" id="uname" name="uname" placeholder="Username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber">Phone Number:</label>
-                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+                    <label for="user_email">Email:</label>
+                    <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Email">
                 </div>
+                <div class="form-group">
+                	<label for="user_role">User Role:</label><br>
+                    <select name="user_role" id="user_role">
+			            <!-- Default -->
+			            <option value="admin">Select Options</option>
+			            
+			            <option value="admin">Admin</option>
+		        	</select>
+                </div>
+                
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
@@ -36,54 +45,55 @@
                 </div>
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
                 <br>
-                <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='adminUI.jsp'">Back</button>
+                <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/admin/adminUI.jsp'">Cancel</button>
             </form>
 				<!-- Form End-->
             <script>
                 function validateForm()                                    
                     { 
-                		var staffNo = document.forms["carpenter_registration_form"]["staffNo"];
-                        var fname = document.forms["carpenter_registration_form"]["fname"];               
-                        var lname = document.forms["carpenter_registration_form"]["lname"];
-                        var uname = document.forms["carpenter_registration_form"]["uname"];
-                        var phoneNumber = document.forms["carpenter_registration_form"]["phoneNumber"];
-                        var password = document.forms["carpenter_registration_form"]["password"];
-                        var confirmPassword = document.forms["carpenter_registration_form"]["confirmPassword"];
+                		var user_number = document.forms["admin_registration_form"]["user_number"];
+                        var user_firstname = document.forms["admin_registration_form"]["user_firstname"];               
+                        var user_lastname = document.forms["admin_registration_form"]["user_lastname"];
+                        var username = document.forms["admin_registration_form"]["username"];
+                        var user_email = document.forms["admin_registration_form"]["user_email"];
+                        var password = document.forms["admin_registration_form"]["password"];
+                        var confirmPassword = document.forms["admin_registration_form"]["confirmPassword"];
                         
-                        if (staffNo.value == "")                                  
+                        if (user_number.value == "")                                  
                         { 
-                            window.alert("Please enter your Staff Number."); 
-                            staffNo.focus(); 
+                            window.alert("Please enter your Staff Number/Registration Number."); 
+                            user_number.focus(); 
                             return false; 
                         } 
 
-                        if (fname.value == "")                                  
+                        if (user_firstname.value == "")                                  
                         { 
-                            window.alert("Please enter your First Name."); 
-                            fname.focus(); 
+                            window.alert("Please enter your Firstname."); 
+                            user_firstname.focus(); 
                             return false; 
                         } 
 
-                        if (lname.value == "")                                  
+                        if (user_lastname.value == "")                                  
                         { 
-                            window.alert("Please enter your Last Name."); 
-                            lname.focus(); 
+                            window.alert("Please enter your Lastname."); 
+                            user_lastname.focus(); 
                             return false; 
                         } 
 
-                        if (uname.value == "")                                  
+                        if (username.value == "")                                  
                         { 
                             window.alert("Please enter your Username."); 
-                            uname.focus(); 
+                            username.focus(); 
                             return false; 
                         } 
                         
-                        if (phoneNumber.value == "")                                  
+                        if (user_email.value == "")                                  
                         { 
-                            window.alert("Please enter your Phone Number."); 
-                            phoneNumber.focus(); 
+                            window.alert("Please enter your Email."); 
+                            user_email.focus(); 
                             return false; 
                         } 
+                        
                         
                         if (password.value == "")                        
                         { 
@@ -123,4 +133,4 @@
 	       </script>
 		</div>
 	</div>
-<%@ include file="/includes/footer.jsp" %>
+<%@ include file="/admin/includes/admin_footer.jsp" %>

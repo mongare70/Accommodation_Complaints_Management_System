@@ -11,5 +11,19 @@
         <a class="nav-link" href="/includes/contact.jsp">Contact</a>
       </div>
     </div>
-  </div>
+    <% 
+    	if (session.getAttribute("USER_FIRSTNAME") != null) { 
+    %>
+    <div class="dropdown">
+	  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+	    <%=session.getAttribute("USER_FIRSTNAME")%>
+	  </a>
+	
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	    <li><a class="dropdown-item" href="#">Profile</a></li>
+	    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+	  </ul>
+	</div>
+	<% } %>
+  </div>  
 </nav>

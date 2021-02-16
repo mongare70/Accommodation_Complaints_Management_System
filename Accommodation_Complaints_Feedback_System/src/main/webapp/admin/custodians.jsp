@@ -47,7 +47,7 @@
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM users ORDER BY user_id DESC";
+			String sql ="SELECT * FROM users WHERE user_role = 'custodian' ORDER BY user_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){

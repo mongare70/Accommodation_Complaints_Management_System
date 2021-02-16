@@ -7,22 +7,22 @@
 	            <form class="form-container" method="post" action="/login" name="login_form" id="login_form" onsubmit="return validateForm()">
 	                <h1>Login Form</h1>
 	                <div class="form-group">
-	                    <label for="category">Category:</label>
-	                    <select class="form-control" id="category" name="category">
-	                        <option>Admin</option>
-	                        <option>Student</option>
-	                        <option>Halls Officer</option>
-	                        <option>Custodian</option>
-	                        <option>Mason</option>
-	                        <option>Carpenter</option>
-	                        <option>Security</option>
-	                        <option>Plumber</option>
-	                        <option>Electrician</option>
+	                    <label for="category">User Role:</label>
+	                    <select class="form-control" id="user_role" name="user_role">
+	                        <option value="admin">Admin</option>
+	                        <option value="student">Student</option>
+	                        <option value="halls_officer">Halls Officer</option>
+	                        <option value="custodian">Custodian</option>
+	                        <option value="mason">Mason</option>
+	                        <option value="carpenter">Carpenter</option>
+	                        <option value="security">Security</option>
+	                        <option value="plumber">Plumber</option>
+	                        <option value="electrician">Electrician</option>
 	                    </select>
 	                </div>
 	                  <div class="form-group">
 	                    <label for="username">Username:</label>
-	                    <input type="text" class="form-control" name="uname" id="uname" placeholder="Username">
+	                    <input type="text" class="form-control" name="username" id="username" placeholder="Username">
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="password">Password:</label>

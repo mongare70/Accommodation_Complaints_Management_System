@@ -1,10 +1,16 @@
 package com.demo.Accommodation_Complaints_Feedback_System.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ReplaceOverride;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,24 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.Accommodation_Complaints_Feedback_System.dao.ServiceHalls;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Admin;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Carpenter;
 import com.demo.Accommodation_Complaints_Feedback_System.model.CarpentersComplaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Student;
 import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 import com.demo.Accommodation_Complaints_Feedback_System.model.DoneComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.AcceptedComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.RejectedComplaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Security;
 import com.demo.Accommodation_Complaints_Feedback_System.model.SecuritysComplaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.HallsOfficer;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Mason;
 import com.demo.Accommodation_Complaints_Feedback_System.model.MasonsComplaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Plumber;
 import com.demo.Accommodation_Complaints_Feedback_System.model.PlumbersComplaint;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Custodian;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Electrician;
 import com.demo.Accommodation_Complaints_Feedback_System.model.ElectriciansComplaint;
 
 @Controller
@@ -43,7 +40,7 @@ public class HallsController {
 		return "login.jsp";
 	}
 	
-	
+	//register new user
 	@PostMapping("/register_user")
 	String addStudent(User user) {
 		
@@ -51,6 +48,16 @@ public class HallsController {
 		return "login.jsp";
 	}
 	
+	
+	//register new admin
+	@PostMapping("/register_admin")
+	String addAdmin(User user) {
+		
+		service.saveUser(user);
+		return "/admin/adminUI.jsp";
+	}
+	
+	//approve user
 	@RequestMapping(value="admin/users.jsp/approved/{userId}", method=RequestMethod.GET)
 		public String approve(@PathVariable("userId") int userId, Map<String, Object> map) {
 		
@@ -62,6 +69,7 @@ public class HallsController {
 		
 	}
 	
+	//unapprove user
 	@RequestMapping(value="admin/users.jsp/unapproved/{userId}", method=RequestMethod.GET)
 	public String unapprove(@PathVariable("userId") int userId, Map<String, Object> map) {
 	
@@ -73,7 +81,7 @@ public class HallsController {
 	
 	}
 	
-	
+	//delete user
 	@RequestMapping(value="admin/users.jsp/delete/{userId}", method=RequestMethod.GET)
 	public String delete(@PathVariable("userId") int userId, Map<String, Object> map) {
 		service.deleteUser(userId);
@@ -81,112 +89,114 @@ public class HallsController {
 	
 	}
 	
-	
-	@PostMapping("/studentRegister")
-	String addStudent(Student student) {
-		
-		service.saveStudent(student);
-		return "studentRegistration.jsp";
-	}
-	
+	//login into platform
 	@PostMapping("/login")
-	public String validate(@RequestParam String category, @RequestParam String uname, @RequestParam String password, Model model){	
+	public String validate(@RequestParam String user_role, @RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpSession session){	
 		   
-		 switch (category) {  
-		 case "Admin":  
-			 Admin admin = service.getAdmin(uname, password);
-				
-				if(admin!=null) {
-					model.addAttribute("admin", admin);
+		 switch (user_role) {  
+			 case "admin":  
+				User admin = service.getUser(username, password);
+				if(admin!=null && admin.getUser_status().equals("approved") && admin.getUser_role().equals("admin")) {
+					
+					//Save Sessions
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
+					
+					if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						user_id = new ArrayList<>();
+						user_firstname = new ArrayList<>();
+						user_lastname = new ArrayList<>();
+						user_number = new ArrayList<>();
+						user_email = new ArrayList<>();
+						request.getSession().setAttribute("USER_ID", user_id);
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+						request.getSession().setAttribute("USER_LASTNAME", user_lastname);
+						request.getSession().setAttribute("USER_NUMBER", user_number);
+						request.getSession().setAttribute("USER_EMAIL", user_email);
+						
+					}
+					
+					user_id.add(admin.getUser_id());
+					user_firstname.add(admin.getUser_firstname());
+					user_lastname.add(admin.getUser_lastname());
+					user_number.add(admin.getUser_number());
+					user_email.add(admin.getUser_email());
+					
+					request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
+					
 					return "admin/adminUI.jsp";
-				}
-				else {
+				} else {
 					return "login.jsp";
 				}
-		  case "Student":  
-			Student student=service.getStudent(uname, password);
-			
-			if(student!=null) {
-				model.addAttribute("student", student);
-				return "studentUI.jsp";
-			}
-			else {
-				return "login.jsp";
-			}
-		   case "Halls Officer":  
-				 HallsOfficer hallsOfficer = service.getHallsOfficer(uname, password);
+			 case "student":  
+				User student = service.getUser(username, password);
+				if(student!=null && student.getUser_status().equals("approved") && student.getUser_role().equals("student")) {
 					
-					if(hallsOfficer!=null) {
-						model.addAttribute("hallsOfficer", hallsOfficer);
-						return "hallsOfficerUI.jsp";
-					}
-					else {
-						return "login.jsp";
-					}
-		   case "Custodian":  
-				 Custodian custodian = service.getCustodian(uname, password);
+					//Save Sessions
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
+					@SuppressWarnings("unchecked")
+					ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
 					
-					if(custodian!=null) {
-						model.addAttribute("custodian", custodian);
-						return "custodianUI.jsp";
-					}
-					else {
-						return "login.jsp";
+					if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						user_id = new ArrayList<>();
+						user_firstname = new ArrayList<>();
+						user_lastname = new ArrayList<>();
+						user_number = new ArrayList<>();
+						user_email = new ArrayList<>();
+						request.getSession().setAttribute("USER_ID", user_id);
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+						request.getSession().setAttribute("USER_LASTNAME", user_lastname);
+						request.getSession().setAttribute("USER_NUMBER", user_number);
+						request.getSession().setAttribute("USER_EMAIL", user_email);
+						
 					}
 					
-		   case "Carpenter":  
-				Carpenter carpenter=service.getCarpenter(uname, password);
-				
-				if(carpenter!=null) {
-					model.addAttribute("carpenter", carpenter);
-					return "carpenterUI.jsp";
-				}
-				else {
+					user_id.add(student.getUser_id());
+					user_firstname.add(student.getUser_firstname());
+					user_lastname.add(student.getUser_lastname());
+					user_number.add(student.getUser_number());
+					user_email.add(student.getUser_email());
+					
+					request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
+					request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
+					
+					return "studentUI.jsp";
+				} else {
 					return "login.jsp";
 				}
-		   case "Security":  
-				Security security = service.getSecurity(uname, password);
-				
-				if(security!=null) {
-					model.addAttribute("security", security);
-					return "securityUI.jsp";
-				}
-				else {
-					return "login.jsp";
-				}
-		   case "Plumber":  
-				Plumber plumber = service.getPlumber(uname, password);
-				
-				if(plumber!=null) {
-					model.addAttribute("plumber", plumber);
-					return "plumberUI.jsp";
-				}
-				else {
-					return "login.jsp";
-				}
-		   case "Electrician":  
-				Electrician electrician = service.getElectrician(uname, password);
-				
-				if(electrician!=null) {
-					model.addAttribute("electrician", electrician);
-					return "electricianUI.jsp";
-				}
-				else {
-					return "login.jsp";
-				}
-		   case "Mason":  
-				Mason mason=service.getMason(uname, password);
-				
-				if(mason!=null) {
-					model.addAttribute("mason", mason);
-					return "masonUI.jsp";
-				}
-				else {
-					return "login.jsp";
-				}
-		   default:  
-		     return "login.jsp";  
+			   	default:  
+			    return "login.jsp";  
+		 }
 	}
+	
+	
+	//kill session
+	@RequestMapping("/logout")
+	public String destroySession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
 	}
 	
 	@PostMapping("/submitComplaint")
@@ -214,56 +224,7 @@ public class HallsController {
 		model.addAttribute("complaint", complaint);
 		return "studentUI.jsp";
 	}
-	
-	@PostMapping("/hallsOfficerRegister")
-	String addHallsOfficer(HallsOfficer hallsOfficer) {
-		
-		service.saveHallsOfficer(hallsOfficer);
-		return "hallsOfficerRegistration.jsp";
-	}
-	
-	@PostMapping("/custodianRegister")
-	String addCustodian(Custodian custodian) {
-		
-		service.saveCustodian(custodian);
-		return "custodianRegistration.jsp";
-	}
-	
-	@PostMapping("/carpenterRegister")
-	String addCarpenter(Carpenter carpenter) {
-		
-		service.saveCarpenter(carpenter);
-		return "carpenterRegistration.jsp";
-	}
-	
-	@PostMapping("/masonRegister")
-	String addMason(Mason mason) {
-		
-		service.saveMason(mason);
-		return "masonRegistration.jsp";
-	}
-	
-	@PostMapping("/securityRegister")
-	String addSecurity(Security security) {
-		
-		service.saveSecurity(security);
-		return "securityRegistration.jsp";
-	}
-	
-	@PostMapping("/plumberRegister")
-	String addPlumber(Plumber plumber) {
-		
-		service.savePlumber(plumber);
-		return "plumberRegistration.jsp";
-	}
-	
-	@PostMapping("/electricianRegister")
-	String addElectrician(Electrician electrician) {
-		
-		service.saveElectrician(electrician);
-		return "electricianRegistration.jsp";
-	}
-	
+				
 	@PostMapping("/acceptComplaint")
 	public String accept(@RequestParam String cid, @RequestParam String fname,
 			@RequestParam String lname,@RequestParam String regNo,
