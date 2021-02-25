@@ -1,188 +1,78 @@
 <%@ include file="/includes/header.jsp" %>
-<button type="button" class="btn btn-danger btn-block" onClick="window.location.href='login.jsp'">Log Out</button>
- <br>
- <br>
- <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='doneComplaintsUI.jsp'">Done Complaints</button>
- <br>
-
+<%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
-		<div class="row">
-			<div class="col-md-2 col-sm-4 col-xs-12"></div>
-            <div class="col-md-2 col-sm-4 col-xs-12"></div>
-                        
-            <%@page import="java.sql.DriverManager"%>
+
+     		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
 			<%@page import="java.sql.Connection"%>
-			
+
 			<%
-			
+
 			String driverName = "com.mysql.cj.jdbc.Driver";
 			String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_feedback_system";
 			String userId = "root";
 			String password = "";
-			
+
 			try {
 			Class.forName(driverName);
-			} catch (ClassNotFoundException e) {
+			}catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			}
-			
+
 			Connection connection = null;
 			Statement statement = null;
 			ResultSet resultSet = null;
 			%>
-			
-			<h2 align="center"><font><strong>Welcome ${custodian.fname} Here are the Complaints for:</strong></font></h2>
-			<table id="complaints" align="center" cellpadding="5" cellspacing="5" border="1">
+
+			<table class="table table-bordered table-hover">
+
 			<tr>
-			
-			</tr>
-			<tr>
-			<td><b>Accepted Complaint Id</b></td>
-			<td><b>First Name</b></td>
-			<td><b>Last Name</b></td>
-			<td><b>Registration Number</b></td>
-			<td><b>Hostel</b></td>
-			<td><b>Block</b></td>
-			<td><b>Room Number</b></td>
-			<td><b>Complaint Title</b></td>
-			<td><b>Complaint Description</b></td>
-			<td><b>Forward to:</b></td>
-			<td><b>Forward to:</b></td>
-			<td><b>Forward to:</b></td>
-			<td><b>Forward to:</b></td>
-			<td><b>Forward to:</b></td>
-			</tr>
+				<td>Complaint ID</td>
+				<td>Complaint Title</td>
+				<td>Complaint Content</td>
+				<td>Complaint Author ID</td>
+				<td>Complaint Status</td>
+				<td>Complaint Category</td>
+				<td>Complaint Done By:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+    		</tr>
+
 			<%
-			try{ 
+			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM accepted_complaints";
-			
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' ORDER BY complaint_id DESC";
+
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
 			%>
 			<tr>
-			
-			<td><%out.println(resultSet.getString("acid")); %></td>
-			<td><%out.println(resultSet.getString("fname")); %></td>
-		    <td><%out.println(resultSet.getString("lname")); %></td>
-		    <td><%out.println(resultSet.getString("reg_no")); %></td>
-		    <td><%out.println(resultSet.getString("hostel")); %></td>
-		    <td><%out.println(resultSet.getString("block")); %></td>
-		    <td><%out.println(resultSet.getString("room_number")); %></td>
-		    <td><%out.println(resultSet.getString("complaint_title")); %></td>
-		    <td><%out.println(resultSet.getString("complaint_description")); %></td>
-		    <td>
-		    <form id="forward_to_plumber_form" name="forward_to_plumber_form" method="post" enctype="form-data" action="/forwardToPlumber">
-	   
-		    <button type="submit" class="btn btn-success">Plumber</button>
-		    
-		    <input type="hidden" id="acid" name="acid" value="<%=resultSet.getString("acid")%>">
-		    <input type="hidden" id="fname" name="fname" value="<%=resultSet.getString("fname")%>">
-            <input type="hidden" id="lname" name="lname" value="<%=resultSet.getString("lname")%>">
-            <input type="hidden" id="regNo" name="regNo" value="<%=resultSet.getString("reg_no")%>">
-            <input type="hidden" id="hostel" name="hostel" value="<%=resultSet.getString("hostel")%>">
-            <input type="hidden" id="block" name="block" value="<%=resultSet.getString("block")%>">
-            <input type="hidden" id="roomNumber" name="roomNumber" value="<%=resultSet.getString("room_number")%>">
-            <input type="hidden" id="complaintTitle" name="complaintTitle" value="<%=resultSet.getString("complaint_title")%>">
-            <input type="hidden" id="complaintDescription" name="complaintDescription" value="<%=resultSet.getString("complaint_description")%>">
-            
-		    </form>
-		    
-		    </td>
-            
-            <td>
-		    <form id="forward_to_carpenter_form" name="forward_to_carpenter_form" method="post" enctype="form-data" action="/forwardToCarpenter">
-	   
-		    <button type="submit" class="btn btn-success">Carpenter</button>
-		    
-		    <input type="hidden" id="acid" name="acid" value="<%=resultSet.getString("acid")%>">
-		    <input type="hidden" id="fname" name="fname" value="<%=resultSet.getString("fname")%>">
-            <input type="hidden" id="lname" name="lname" value="<%=resultSet.getString("lname")%>">
-            <input type="hidden" id="regNo" name="regNo" value="<%=resultSet.getString("reg_no")%>">
-            <input type="hidden" id="hostel" name="hostel" value="<%=resultSet.getString("hostel")%>">
-            <input type="hidden" id="block" name="block" value="<%=resultSet.getString("block")%>">
-            <input type="hidden" id="roomNumber" name="roomNumber" value="<%=resultSet.getString("room_number")%>">
-            <input type="hidden" id="complaintTitle" name="complaintTitle" value="<%=resultSet.getString("complaint_title")%>">
-            <input type="hidden" id="complaintDescription" name="complaintDescription" value="<%=resultSet.getString("complaint_description")%>">
-            
-		    </form>
-		    
-		    </td>
-		   
-             <td>
-		    <form id="forward_to_security_form" name="forward_to_security_form" method="post" enctype="form-data" action="/forwardToSecurity">
-	   
-		    <button type="submit" class="btn btn-success">Security</button>
-		    
-		    <input type="hidden" id="acid" name="acid" value="<%=resultSet.getString("acid")%>">
-		    <input type="hidden" id="fname" name="fname" value="<%=resultSet.getString("fname")%>">
-            <input type="hidden" id="lname" name="lname" value="<%=resultSet.getString("lname")%>">
-            <input type="hidden" id="regNo" name="regNo" value="<%=resultSet.getString("reg_no")%>">
-            <input type="hidden" id="hostel" name="hostel" value="<%=resultSet.getString("hostel")%>">
-            <input type="hidden" id="block" name="block" value="<%=resultSet.getString("block")%>">
-            <input type="hidden" id="roomNumber" name="roomNumber" value="<%=resultSet.getString("room_number")%>">
-            <input type="hidden" id="complaintTitle" name="complaintTitle" value="<%=resultSet.getString("complaint_title")%>">
-            <input type="hidden" id="complaintDescription" name="complaintDescription" value="<%=resultSet.getString("complaint_description")%>">
-            
-		    </form>
-		    
-		    </td>
-                
-             <td>
-		    <form id="forward_to_electrician_form" name="forward_to_electrician_form" method="post" enctype="form-data" action="/forwardToElectrician">
-	   
-		    <button type="submit" class="btn btn-success">Electrician</button>
-		    
-		    <input type="hidden" id="acid" name="acid" value="<%=resultSet.getString("acid")%>">
-		    <input type="hidden" id="fname" name="fname" value="<%=resultSet.getString("fname")%>">
-            <input type="hidden" id="lname" name="lname" value="<%=resultSet.getString("lname")%>">
-            <input type="hidden" id="regNo" name="regNo" value="<%=resultSet.getString("reg_no")%>">
-            <input type="hidden" id="hostel" name="hostel" value="<%=resultSet.getString("hostel")%>">
-            <input type="hidden" id="block" name="block" value="<%=resultSet.getString("block")%>">
-            <input type="hidden" id="roomNumber" name="roomNumber" value="<%=resultSet.getString("room_number")%>">
-            <input type="hidden" id="complaintTitle" name="complaintTitle" value="<%=resultSet.getString("complaint_title")%>">
-            <input type="hidden" id="complaintDescription" name="complaintDescription" value="<%=resultSet.getString("complaint_description")%>">
-            
-		    </form>
-		    
-		    </td>
-                
-             <td>
-		    <form id="forward_to_mason_form" name="forward_to_mason_form" method="post" enctype="form-data" action="/forwardToMason">
-	   
-		    <button type="submit" class="btn btn-success">Mason</button>
-		    
-		    <input type="hidden" id="acid" name="acid" value="<%=resultSet.getString("acid")%>">
-		    <input type="hidden" id="fname" name="fname" value="<%=resultSet.getString("fname")%>">
-            <input type="hidden" id="lname" name="lname" value="<%=resultSet.getString("lname")%>">
-            <input type="hidden" id="regNo" name="regNo" value="<%=resultSet.getString("reg_no")%>">
-            <input type="hidden" id="hostel" name="hostel" value="<%=resultSet.getString("hostel")%>">
-            <input type="hidden" id="block" name="block" value="<%=resultSet.getString("block")%>">
-            <input type="hidden" id="roomNumber" name="roomNumber" value="<%=resultSet.getString("room_number")%>">
-            <input type="hidden" id="complaintTitle" name="complaintTitle" value="<%=resultSet.getString("complaint_title")%>">
-            <input type="hidden" id="complaintDescription" name="complaintDescription" value="<%=resultSet.getString("complaint_description")%>">
-            
-		    </form>
-		    
-		    </td>
-                
+				<td><%out.println(resultSet.getString("complaint_id")); %></td>
+				<td><%out.println(resultSet.getString("complaint_title")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
+		    	<td><a href='custodianUI.jsp/mason/<%out.println(resultSet.getString("complaint_id")); %>'>Mason</a></td>
+		    	<td><a href='custodianUI.jsp/plumber/<%out.println(resultSet.getString("complaint_id")); %>'>Plumber</a></td>
+		    	<td><a href='custodianUI.jsp/carpenter/<%out.println(resultSet.getString("complaint_id")); %>'>Carpenter</a></td>
+		    	<td><a href='custodianUI.jsp/security/<%out.println(resultSet.getString("complaint_id")); %>'>Security</a></td>
+		    	<td><a href='custodianUI.jsp/electrician/<%out.println(resultSet.getString("complaint_id")); %>'>Electrician</a></td>
 			</tr>
-			
-			<% 
-			}
-			
-			} catch (Exception e) {
-			e.printStackTrace();
-			}
+
+			<%
+		    }
+
+		    } catch (Exception e) {
+		    e.printStackTrace();
+		    }
 			%>
 			</table>
-			                    
-            <div class="lead" onmessage="${message}"></div>
-
-		</div>
-        <div class="col-md-4 col-sm-4 col-xs-12"></div>
-	</div>
+</div>
 <%@ include file="/includes/footer.jsp" %>

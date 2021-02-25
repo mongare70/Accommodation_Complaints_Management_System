@@ -16,112 +16,87 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Complaint {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int cid;
+	private int complaint_id;
 	
 	@NotBlank
-	private String complaintTitle;
+	private String complaint_title;
 	
 	@NotBlank
-	private String complaintDescription;
+	private String complaint_content;
 	
 	@NotBlank
-	private String fname;
+	private String complaint_status;
 	
 	@NotBlank
-	private String lname;
+	private String complaint_category;
+	
+	private int complaint_author_id;
 	
 	@NotBlank
-	private String regNo;
-	
-	@NotBlank
-	private String phoneNumber;
-	
-	@NotBlank
-	private String hostel;
-	
-	@NotBlank
-	private String block;
-	
-	@NotBlank
-	private String roomNumber;
+	private String complaint_done_by;
 
-	public String getComplaintTitle() {
-		return complaintTitle;
+	public String getComplaint_done_by() {
+		return complaint_done_by;
 	}
 
-	public void setComplaintTitle(String complaintTitle) {
-		this.complaintTitle = complaintTitle;
+	public void setComplaint_done_by(String complaint_done_by) {
+		this.complaint_done_by = complaint_done_by;
 	}
 
-	public String getComplaintDescription() {
-		return complaintDescription;
+	public String getComplaint_category() {
+		return complaint_category;
 	}
 
-	public void setComplaintDescription(String complaintDescription) {
-		this.complaintDescription = complaintDescription;
+	public void setComplaint_category(String complaint_category) {
+		this.complaint_category = complaint_category;
 	}
 
-	public String getFname() {
-		return fname;
+	public int getComplaint_id() {
+		return complaint_id;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setComplaint_id(int complaint_id) {
+		this.complaint_id = complaint_id;
 	}
 
-	public String getLname() {
-		return lname;
+	public String getComplaint_title() {
+		return complaint_title;
 	}
 
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setComplaint_title(String complaint_title) {
+		this.complaint_title = complaint_title;
 	}
 
-	public String getRegNo() {
-		return regNo;
+	public String getComplaint_content() {
+		return complaint_content;
 	}
 
-	public void setRegNo(String regNo) {
-		this.regNo = regNo;
+	public void setComplaint_content(String complaint_content) {
+		this.complaint_content = complaint_content;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getComplaint_status() {
+		return complaint_status;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setComplaint_status(String complaint_status) {
+		this.complaint_status = complaint_status;
 	}
 
-	public String getHostel() {
-		return hostel;
+	public int getComplaint_author_id() {
+		return complaint_author_id;
 	}
 
-	public void setHostel(String hostel) {
-		this.hostel = hostel;
-	}
-
-	public String getBlock() {
-		return block;
-	}
-
-	public void setBlock(String block) {
-		this.block = block;
-	}
-
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
+	public void setComplaint_author_id(int complaint_author_id) {
+		this.complaint_author_id = complaint_author_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Complaint [cid=" + cid + ", complaintTitle=" + complaintTitle + ", complaintDescription="
-				+ complaintDescription + ", fname=" + fname + ", lname=" + lname + ", regNo=" + regNo + ", phoneNumber="
-				+ phoneNumber + ", hostel=" + hostel + ", block=" + block + ", roomNumber=" + roomNumber + "]";
-	}	
+		return "Complaint [complaint_id=" + complaint_id + ", complaint_title=" + complaint_title
+				+ ", complaint_content=" + complaint_content + ", complaint_status=" + complaint_status
+				+ ", complaint_category=" + complaint_category + ", complaint_author_id=" + complaint_author_id
+				+ ", complaint_done_by=" + complaint_done_by + "]";
+	}
 	
 }

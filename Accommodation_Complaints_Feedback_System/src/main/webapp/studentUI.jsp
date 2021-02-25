@@ -1,6 +1,7 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %>
     <div class="container-fluid bg">
+    	<h1>${message}</h1>
 		<div class="container">
 				<!-- Form Start -->
             <form class="form-container" method="post" action="/submitComplaint" id="complaintForm" name="complaintForm" onsubmit="return formValidate()">
@@ -11,40 +12,39 @@
                 <br>
                 <h1>Complaint Form</h1>
                   <div class="form-group">
-                    <label for="complaintTitle">Complaint Title:</label>
-                    <input type="text" class="form-control" id="complaintTitle" name="complaintTitle" placeholder="Complaint Title">
+                    <label for="complaint_title">Complaint Title:</label>
+                    <input type="text" class="form-control" id="complaint_title" name="complaint_title" placeholder="Complaint Title">
                   </div>
                   <div class="form-group">
-                    <label for="complaintDescription">Complaint Description:</label>
-                    <textarea rows="5" cols="50" class="form-control" id="complaintDescription" name="complaintDescription" placeholder="Complaint Description"></textarea>
+                    <label for="complaint_content">Complaint Content:</label>
+                    <textarea rows="5" cols="50" class="form-control" id="complaint_content" name="complaint_content" placeholder="Complaint Content"></textarea>
                   </div>
-                
+                  
+                  
+  		          <input type="hidden" id="complaint_author_id" name="complaint_author_id" value="<%=session.getAttribute("USER_ID")%>">
+               
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
             </form>
-            <br>
-            <form action="/logout" method="post">
-            	<button type="submit" class="btn btn-danger btn-block">Log Out</button>
-            </form>
-				<!-- Form End-->
+            <!-- Form End-->
 		</div>
 	</div>
 	<script type="text/javascript">
 	 function formValidate()                                    
      { 
-         var complaintTitle = document.forms["complaintForm"]["complaintTitle"];               
-         var complaintDescription = document.forms["complaintForm"]["complaintDescription"];
+         var complaint_title = document.forms["complaintForm"]["complaint_title"];               
+         var complaint_content = document.forms["complaintForm"]["complaint_content"];
         
-         if (complaintTitle.value == "")                                  
+         if (complaint_title.value == "")                                  
          { 
              window.alert("Please enter the Complaint Title."); 
-             complaintTitle.focus(); 
+             complaint_title.focus(); 
              return false; 
          } 
 
-         if (complaintDescription.value == "")                                  
+         if (complaint_content.value == "")                                  
          { 
              window.alert("Please enter the Complaint Description."); 
-             complaintDescription.focus(); 
+             complaint_content.focus(); 
              return false; 
          }
 

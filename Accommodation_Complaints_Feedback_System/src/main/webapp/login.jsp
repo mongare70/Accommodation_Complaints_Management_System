@@ -2,6 +2,7 @@
 <%@ include file="/includes/navigation.jsp" %>
       
     <div class="container-fluid bg">
+    <h1>${alreadyLoggedIn}</h1>
 		<div class="container">
 				<!-- Form Start -->
 	            <form class="form-container" method="post" action="/login" name="login_form" id="login_form" onsubmit="return validateForm()">
