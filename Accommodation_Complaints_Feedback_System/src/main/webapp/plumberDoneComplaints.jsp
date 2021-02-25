@@ -2,8 +2,6 @@
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
 
- <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/plumberDoneComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'done'</button>
-
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -44,7 +42,7 @@
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' AND complaint_category = 'plumber' AND complaint_done_by = 0 ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'done' AND complaint_category = 'plumber' AND complaint_done_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -57,7 +55,7 @@
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
-		    	<td><a href='plumberUI.jsp/plumber/done/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Done</a></td>
+		    	<td><a href='plumberUI.jsp/plumber/undo/<%out.println(resultSet.getString("complaint_id")); %>'>Undo</a></td>
 
 			</tr>
 

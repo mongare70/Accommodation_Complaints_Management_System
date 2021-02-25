@@ -2,6 +2,10 @@
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
 
+	<button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/hallsOfficerApprovedComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'approved'</button>
+	<br>
+	<button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/hallsOfficerRejectedComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'rejected'</button>
+ 	<br>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -43,7 +47,7 @@
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'pending' ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){

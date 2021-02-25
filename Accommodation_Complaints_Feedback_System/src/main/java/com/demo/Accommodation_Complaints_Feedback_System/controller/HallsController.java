@@ -277,6 +277,53 @@ public class HallsController {
 					}	
 					
 					
+			 case "plumber":  
+					User plumber = service.getUser(username, password);
+					if(plumber!=null && plumber.getUser_status().equals("approved") && plumber.getUser_role().equals("plumber")) {
+						
+						//Save Sessions
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
+						
+						
+						if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+							user_id = new ArrayList<>();
+							user_firstname = new ArrayList<>();
+							user_lastname = new ArrayList<>();
+							user_number = new ArrayList<>();
+							user_email = new ArrayList<>();
+							request.getSession().setAttribute("USER_ID", user_id);
+							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+							request.getSession().setAttribute("USER_LASTNAME", user_lastname);
+							request.getSession().setAttribute("USER_NUMBER", user_number);
+							request.getSession().setAttribute("USER_EMAIL", user_email);
+							
+						}
+						
+						user_id.add(plumber.getUser_id());
+						user_firstname.add(plumber.getUser_firstname());
+						user_lastname.add(plumber.getUser_lastname());
+						user_number.add(plumber.getUser_number());
+						user_email.add(plumber.getUser_email());
+						
+						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
+						
+						return "plumberUI.jsp";
+					} else {
+						return "login.jsp";
+					}	
 					
 			   	default:  
 			    return "login.jsp";  
@@ -298,9 +345,6 @@ public class HallsController {
 		complaint.setComplaint_title(complaint_title);
 		complaint.setComplaint_content(complaint_content);
 		complaint.setComplaint_author_id(complaint_author_id);
-		complaint.setComplaint_status("pending");
-		complaint.setComplaint_category("undefined");
-		complaint.setComplaint_done_by("undefined");
 		
 		service.saveComplaint(complaint);
 		return "redirect:/studentUI.jsp";
@@ -394,5 +438,31 @@ public class HallsController {
 		return "redirect:/custodianUI.jsp";
 		
 	}
+	
+	//Set complaint done by to plumber ID	
+		@RequestMapping(value="plumberUI.jsp/plumber/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String setComplaintDoneByToPlumber(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/plumberUI.jsp";
+			
+		}
+		
+	//undo complaint done by to 0	
+		@RequestMapping(value="plumberUI.jsp/plumber/undo/{complaint_id}", method=RequestMethod.GET)
+			public String setComplaintDoneByToZero(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_done_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/plumberUI.jsp";
+			
+		}
 	
 }

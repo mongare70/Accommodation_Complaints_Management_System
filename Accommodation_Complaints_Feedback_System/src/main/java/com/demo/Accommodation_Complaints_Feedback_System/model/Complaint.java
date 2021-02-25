@@ -25,21 +25,20 @@ public class Complaint {
 	private String complaint_content;
 	
 	@NotBlank
-	private String complaint_status;
+	private String complaint_status = "pending";
 	
-	@NotBlank
-	private String complaint_category;
+	@NotBlank 
+	private String complaint_category = "undefined";
 	
 	private int complaint_author_id;
 	
-	@NotBlank
-	private String complaint_done_by;
+	private int complaint_done_by = 0;
 
-	public String getComplaint_done_by() {
+	public int getComplaint_done_by() {
 		return complaint_done_by;
 	}
 
-	public void setComplaint_done_by(String complaint_done_by) {
+	public void setComplaint_done_by(int complaint_done_by) {
 		this.complaint_done_by = complaint_done_by;
 	}
 
