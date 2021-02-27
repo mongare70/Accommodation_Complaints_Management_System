@@ -1,9 +1,12 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
-
- <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/plumberDoneComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'done'</button>
-
+	<br>
+	<button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/plumberClaimedComplaints.jsp'">Click Here To Go To Complaints That <%=session.getAttribute("USER_FIRSTNAME")%> Has 'Claimed'</button>
+	<br>
+	<button type="button" class="btn btn-success btn-block" onClick="window.location.href='/plumberDoneComplaints.jsp'">Click Here To Go To Complaints That <%=session.getAttribute("USER_FIRSTNAME")%> Has 'done'</button>
+	<br>
+	<h1 style="text-align: center;"> List of Unclaimed Complaints </h1>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -36,15 +39,14 @@
 				<td>Complaint Author ID</td>
 				<td>Complaint Status</td>
 				<td>Complaint Category</td>
-				<td>Complaint Done By:</td>
-				<td>Followed up on complaint:</td>
+				<td>Claim Complaint</td>
     		</tr>
 
 			<%
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' AND complaint_category = 'plumber' AND complaint_done_by = 0 ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' AND complaint_category = 'plumber' AND complaint_claimed_by = 0 AND complaint_done_by = 0 ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -56,8 +58,7 @@
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
-		    	<td><a href='plumberUI.jsp/plumber/done/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Done</a></td>
+		    	<td><a href='plumberUI.jsp/plumber/claim/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Claim</a></td>
 
 			</tr>
 

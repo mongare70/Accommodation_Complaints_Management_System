@@ -35,14 +35,14 @@
 				<td>Complaint Status</td>
 				<td>Complaint Category</td>
 				<td>Complaint Done By:</td>
-				<td>Followed up on complaint:</td>
+				<td>Undo Complaint</td>
     		</tr>
 
 			<%
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'done' AND complaint_category = 'plumber' AND complaint_done_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'done' AND complaint_category = 'plumber' AND complaint_done_by = "+ session.getAttribute("USER_ID") +" AND complaint_claimed_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -55,7 +55,7 @@
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
-		    	<td><a href='plumberUI.jsp/plumber/undo/<%out.println(resultSet.getString("complaint_id")); %>'>Undo</a></td>
+		    	<td><a href='plumberDoneComplaints.jsp/plumber/undo/<%out.println(resultSet.getString("complaint_id")); %>'>Undo</a></td>
 
 			</tr>
 

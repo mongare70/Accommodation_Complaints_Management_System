@@ -30,9 +30,32 @@ public class Complaint {
 	@NotBlank 
 	private String complaint_category = "undefined";
 	
+	private int complaint_approved_or_rejected_by = 0;
+	
 	private int complaint_author_id;
 	
+	private int complaint_claimed_by = 0;
+	
 	private int complaint_done_by = 0;
+
+	
+	
+
+	public int getComplaint_claimed_by() {
+		return complaint_claimed_by;
+	}
+
+	public void setComplaint_claimed_by(int complaint_claimed_by) {
+		this.complaint_claimed_by = complaint_claimed_by;
+	}
+
+	public int getComplaint_approved_or_rejected_by() {
+		return complaint_approved_or_rejected_by;
+	}
+
+	public void setComplaint_approved_or_rejected_by(int complaint_approved_or_rejected_by) {
+		this.complaint_approved_or_rejected_by = complaint_approved_or_rejected_by;
+	}
 
 	public int getComplaint_done_by() {
 		return complaint_done_by;
@@ -94,8 +117,9 @@ public class Complaint {
 	public String toString() {
 		return "Complaint [complaint_id=" + complaint_id + ", complaint_title=" + complaint_title
 				+ ", complaint_content=" + complaint_content + ", complaint_status=" + complaint_status
-				+ ", complaint_category=" + complaint_category + ", complaint_author_id=" + complaint_author_id
-				+ ", complaint_done_by=" + complaint_done_by + "]";
-	}
+				+ ", complaint_category=" + complaint_category + ", complaint_approved_or_rejected_by="
+				+ complaint_approved_or_rejected_by + ", complaint_author_id=" + complaint_author_id
+				+ ", complaint_claimed_by=" + complaint_claimed_by + ", complaint_done_by=" + complaint_done_by + "]";
+	}	
 	
 }

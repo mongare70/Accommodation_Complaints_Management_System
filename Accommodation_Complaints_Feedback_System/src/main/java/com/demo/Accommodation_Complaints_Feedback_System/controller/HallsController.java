@@ -35,7 +35,7 @@ public class HallsController {
 	String addStudent(User user) {
 		
 		service.saveUser(user);
-		return "login.jsp";
+		return "redirect:/login.jsp";
 	}
 	
 	
@@ -44,7 +44,7 @@ public class HallsController {
 	String addAdmin(User user) {
 		
 		service.saveUser(user);
-		return "/admin/adminUI.jsp";
+		return "redirect:/admin/adminUI.jsp";
 	}
 	
 	//approve user
@@ -93,43 +93,27 @@ public class HallsController {
 					ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
 					@SuppressWarnings("unchecked")
 					ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
-					@SuppressWarnings("unchecked")
-					ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
-					@SuppressWarnings("unchecked")
-					ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
-					@SuppressWarnings("unchecked")
-					ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
-				
+					
 								
-					if (user_id == null ||  user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+					if (user_id == null ||  user_firstname == null) {
 						user_id = new ArrayList<>();
 						user_firstname = new ArrayList<>();
-						user_lastname = new ArrayList<>();
-						user_number = new ArrayList<>();
-						user_email = new ArrayList<>();
+						
 						request.getSession().setAttribute("USER_ID", user_id);
 						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-						request.getSession().setAttribute("USER_LASTNAME", user_lastname);
-						request.getSession().setAttribute("USER_NUMBER", user_number);
-						request.getSession().setAttribute("USER_EMAIL", user_email);
 						
 					}
 					
 					user_id.add(admin.getUser_id());
 					user_firstname.add(admin.getUser_firstname());
-					user_lastname.add(admin.getUser_lastname());
-					user_number.add(admin.getUser_number());
-					user_email.add(admin.getUser_email());
 					
 					request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
-					request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
-					request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
-					request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
 					
-					return "admin/adminUI.jsp";
+					return "redirect:/admin/adminUI.jsp";
+					
 				} else {
-					return "login.jsp";
+					return "redirect:/login.jsp";
 				}
 				
 			 case "student":  
@@ -141,43 +125,27 @@ public class HallsController {
 						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
 						@SuppressWarnings("unchecked")
 						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
 						
 						
-						if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						if (user_id == null || user_firstname == null) {
 							user_id = new ArrayList<>();
 							user_firstname = new ArrayList<>();
-							user_lastname = new ArrayList<>();
-							user_number = new ArrayList<>();
-							user_email = new ArrayList<>();
+							
 							request.getSession().setAttribute("USER_ID", user_id);
 							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-							request.getSession().setAttribute("USER_LASTNAME", user_lastname);
-							request.getSession().setAttribute("USER_NUMBER", user_number);
-							request.getSession().setAttribute("USER_EMAIL", user_email);
 							
 						}
 						
 						user_id.add(student.getUser_id());
 						user_firstname.add(student.getUser_firstname());
-						user_lastname.add(student.getUser_lastname());
-						user_number.add(student.getUser_number());
-						user_email.add(student.getUser_email());
 						
 						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
 						
-						return "studentUI.jsp";
+						return "redirect:/studentUI.jsp";
+						
 					} else {
-						return "login.jsp";
+						return "redirect:/login.jsp";
 					}
 				
 			 case "halls_officer":  
@@ -189,43 +157,26 @@ public class HallsController {
 						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
 						@SuppressWarnings("unchecked")
 						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
 						
-						
-						if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						if (user_id == null || user_firstname == null) {
 							user_id = new ArrayList<>();
 							user_firstname = new ArrayList<>();
-							user_lastname = new ArrayList<>();
-							user_number = new ArrayList<>();
-							user_email = new ArrayList<>();
+							
 							request.getSession().setAttribute("USER_ID", user_id);
 							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-							request.getSession().setAttribute("USER_LASTNAME", user_lastname);
-							request.getSession().setAttribute("USER_NUMBER", user_number);
-							request.getSession().setAttribute("USER_EMAIL", user_email);
 							
 						}
 						
 						user_id.add(halls_officer.getUser_id());
 						user_firstname.add(halls_officer.getUser_firstname());
-						user_lastname.add(halls_officer.getUser_lastname());
-						user_number.add(halls_officer.getUser_number());
-						user_email.add(halls_officer.getUser_email());
-						
+					
 						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
 						
-						return "hallsOfficerUI.jsp";
+						return "redirect:/hallsOfficerUI.jsp";
+						
 					} else {
-						return "login.jsp";
+						return "redirect:/login.jsp";
 					}
 				
 			 case "custodian":  
@@ -237,43 +188,27 @@ public class HallsController {
 						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
 						@SuppressWarnings("unchecked")
 						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
 						
 						
-						if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						if (user_id == null || user_firstname == null) {
 							user_id = new ArrayList<>();
 							user_firstname = new ArrayList<>();
-							user_lastname = new ArrayList<>();
-							user_number = new ArrayList<>();
-							user_email = new ArrayList<>();
+							
 							request.getSession().setAttribute("USER_ID", user_id);
 							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-							request.getSession().setAttribute("USER_LASTNAME", user_lastname);
-							request.getSession().setAttribute("USER_NUMBER", user_number);
-							request.getSession().setAttribute("USER_EMAIL", user_email);
 							
 						}
 						
 						user_id.add(custodian.getUser_id());
 						user_firstname.add(custodian.getUser_firstname());
-						user_lastname.add(custodian.getUser_lastname());
-						user_number.add(custodian.getUser_number());
-						user_email.add(custodian.getUser_email());
 						
 						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
 						
-						return "custodianUI.jsp";
+						return "redirect:/custodianUI.jsp";
+						
 					} else {
-						return "login.jsp";
+						return "redirect:/login.jsp";
 					}	
 					
 					
@@ -286,47 +221,30 @@ public class HallsController {
 						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
 						@SuppressWarnings("unchecked")
 						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_lastname = (ArrayList<Object>) request.getSession().getAttribute("USER_LASTNAME");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_number = (ArrayList<Object>) request.getSession().getAttribute("USER_NUMBER");
-						@SuppressWarnings("unchecked")
-						ArrayList<Object> user_email = (ArrayList<Object>) request.getSession().getAttribute("USER_EMAIL");
 						
-						
-						if (user_id == null || user_firstname == null || user_lastname == null || user_number == null || user_email == null) {
+						if (user_id == null || user_firstname == null) {
 							user_id = new ArrayList<>();
 							user_firstname = new ArrayList<>();
-							user_lastname = new ArrayList<>();
-							user_number = new ArrayList<>();
-							user_email = new ArrayList<>();
+							
 							request.getSession().setAttribute("USER_ID", user_id);
 							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-							request.getSession().setAttribute("USER_LASTNAME", user_lastname);
-							request.getSession().setAttribute("USER_NUMBER", user_number);
-							request.getSession().setAttribute("USER_EMAIL", user_email);
 							
 						}
 						
 						user_id.add(plumber.getUser_id());
 						user_firstname.add(plumber.getUser_firstname());
-						user_lastname.add(plumber.getUser_lastname());
-						user_number.add(plumber.getUser_number());
-						user_email.add(plumber.getUser_email());
 						
 						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_LASTNAME", user_lastname.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_NUMBER", user_number.toString().replace("[", "").replace("]", ""));
-						request.getSession().setAttribute("USER_EMAIL", user_email.toString().replace("[", "").replace("]", ""));
 						
-						return "plumberUI.jsp";
+						return "redirect:/plumberUI.jsp";
+						
 					} else {
-						return "login.jsp";
+						return "redirect:/login.jsp";
 					}	
 					
 			   	default:  
-			    return "login.jsp";  
+			    return "redirect:/login.jsp";  
 		 }
 	}
 	
@@ -351,11 +269,12 @@ public class HallsController {
 	}
 				
 	//approve complaint
-	@RequestMapping(value="hallsOfficerUI.jsp/approve/{complaint_id}", method=RequestMethod.GET)
-		public String approveComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+	@RequestMapping(value="hallsOfficerUI.jsp/approve/{complaint_id}/{user_id}", method=RequestMethod.GET)
+		public String approveComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID,  Map<String, Object> map) {
 		
 		Complaint complaint = service.getComplaint(complaintId);
 		complaint.setComplaint_status("approved");
+		complaint.setComplaint_approved_or_rejected_by(userID);
 		service.saveComplaint(complaint);
 		
 		return "redirect:/hallsOfficerUI.jsp";
@@ -364,11 +283,12 @@ public class HallsController {
 	
 	
 	//reject complaint
-	@RequestMapping(value="hallsOfficerUI.jsp/reject/{complaint_id}", method=RequestMethod.GET)
-		public String rejectComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+	@RequestMapping(value="hallsOfficerUI.jsp/reject/{complaint_id}/{user_id}", method=RequestMethod.GET)
+		public String rejectComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
 		
 		Complaint complaint = service.getComplaint(complaintId);
 		complaint.setComplaint_status("rejected");
+		complaint.setComplaint_approved_or_rejected_by(userID);
 		service.saveComplaint(complaint);
 		
 		return "redirect:/hallsOfficerUI.jsp";
@@ -439,29 +359,56 @@ public class HallsController {
 		
 	}
 	
-	//Set complaint done by to plumber ID	
-		@RequestMapping(value="plumberUI.jsp/plumber/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String setComplaintDoneByToPlumber(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+	//Claim complaint by Plumber	
+		@RequestMapping(value="plumberUI.jsp/plumber/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String claimComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("done");
-			complaint.setComplaint_done_by(userID);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_claimed_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/plumberClaimedComplaints.jsp";
+			
+		}
+		
+	//Unclaim complaint by Plumber	
+		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/unclaim/{complaint_id}", method=RequestMethod.GET)
+			public String unclaimComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_claimed_by(0);
 			service.saveComplaint(complaint);
 			
 			return "redirect:/plumberUI.jsp";
 			
 		}
 		
-	//undo complaint done by to 0	
-		@RequestMapping(value="plumberUI.jsp/plumber/undo/{complaint_id}", method=RequestMethod.GET)
-			public String setComplaintDoneByToZero(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+		
+	//Done complaint by Plumber	
+		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String doneComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/plumberDoneComplaints.jsp";
+			
+		}
+		
+	//Undo complaint by Plumber	
+		@RequestMapping(value="plumberDoneComplaints.jsp/plumber/undo/{complaint_id}", method=RequestMethod.GET)
+			public String undoComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
 			complaint.setComplaint_done_by(0);
 			service.saveComplaint(complaint);
 			
-			return "redirect:/plumberUI.jsp";
+			return "redirect:/plumberClaimedComplaints.jsp";
 			
 		}
 	
