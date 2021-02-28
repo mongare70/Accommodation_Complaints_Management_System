@@ -25,6 +25,9 @@
 	        <li><a class="dropdown-item" href="/admin/users.jsp">All Users</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/complaints.jsp">Complaints</a>
+        </li>
       </ul>
     </div>
     <div class="dropdown">

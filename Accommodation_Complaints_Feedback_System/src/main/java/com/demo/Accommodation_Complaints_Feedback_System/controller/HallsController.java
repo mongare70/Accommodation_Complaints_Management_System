@@ -411,5 +411,13 @@ public class HallsController {
 			return "redirect:/plumberClaimedComplaints.jsp";
 			
 		}
+		
+	//delete complaint
+	@RequestMapping(value="admin/complaints.jsp/delete/{complaintId}", method=RequestMethod.GET)
+	public String deleteComplaint(@PathVariable("complaintId") int complaintId, Map<String, Object> map) {
+		service.deleteComplaint(complaintId);
+		return "redirect:/admin/complaints.jsp";
+	
+	}
 	
 }
