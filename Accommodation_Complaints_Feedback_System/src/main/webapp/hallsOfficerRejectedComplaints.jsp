@@ -1,7 +1,7 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
- 
+<button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='hallsOfficerUI.jsp'">Back</button>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -24,7 +24,8 @@
 			Statement statement = null;
 			ResultSet resultSet = null;
 			%>
-
+			
+			<h1 style="text-align: center;"> List of Complaints Rejected By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
 			<table class="table table-bordered table-hover">
 
 			<tr>

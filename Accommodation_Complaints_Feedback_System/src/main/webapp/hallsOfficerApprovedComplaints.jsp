@@ -1,6 +1,7 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
+<button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='hallsOfficerUI.jsp'">Back</button>
  
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
@@ -24,7 +25,7 @@
 			Statement statement = null;
 			ResultSet resultSet = null;
 			%>
-
+			<h1 style="text-align: center;"> List of Complaints Approved By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
 			<table class="table table-bordered table-hover">
 
 			<tr>
@@ -44,7 +45,7 @@
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' AND complaint_approved_or_rejected_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_approved_or_rejected_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){

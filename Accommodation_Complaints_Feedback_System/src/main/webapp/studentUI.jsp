@@ -1,12 +1,11 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %>
     <div class="container-fluid bg">
-    	<h1>${message}</h1>
 		<div class="container">
 				<!-- Form Start -->
             <form class="form-container" method="post" action="/submitComplaint" id="complaintForm" name="complaintForm" onsubmit="return formValidate()">
                 <br>
-                <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='StatusUI.jsp'">Complaint Status</button>
+                <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='statusUI.jsp'">Click Here To See <%=session.getAttribute("USER_FIRSTNAME") %>'s Complaint Status</button>
                 <br>
                 <h1>Welcome <%=session.getAttribute("USER_FIRSTNAME")%></h1>
                 <br>

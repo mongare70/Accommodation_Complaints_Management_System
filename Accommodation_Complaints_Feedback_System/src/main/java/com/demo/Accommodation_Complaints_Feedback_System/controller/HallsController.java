@@ -412,11 +412,19 @@ public class HallsController {
 			
 		}
 		
-	//delete complaint
+	//delete complaint by admin
 	@RequestMapping(value="admin/complaints.jsp/delete/{complaintId}", method=RequestMethod.GET)
-	public String deleteComplaint(@PathVariable("complaintId") int complaintId, Map<String, Object> map) {
+	public String deleteComplaintAdmin(@PathVariable("complaintId") int complaintId, Map<String, Object> map) {
 		service.deleteComplaint(complaintId);
 		return "redirect:/admin/complaints.jsp";
+	
+	}
+	
+	//delete complaint by user
+	@RequestMapping(value="statusUI.jsp/delete/{complaintId}", method=RequestMethod.GET)
+	public String deleteComplaintUser(@PathVariable("complaintId") int complaintId, Map<String, Object> map) {
+		service.deleteComplaint(complaintId);
+		return "redirect:/statusUI.jsp";
 	
 	}
 	
