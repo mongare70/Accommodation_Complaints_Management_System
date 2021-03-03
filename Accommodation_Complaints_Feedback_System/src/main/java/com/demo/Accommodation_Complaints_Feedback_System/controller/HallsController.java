@@ -243,6 +243,130 @@ public class HallsController {
 						return "redirect:/login.jsp";
 					}	
 					
+			 case "mason":  
+					User mason = service.getUser(username, password);
+					if(mason!=null && mason.getUser_status().equals("approved") && mason.getUser_role().equals("mason")) {
+						
+						//Save Sessions
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+						
+						if (user_id == null || user_firstname == null) {
+							user_id = new ArrayList<>();
+							user_firstname = new ArrayList<>();
+							
+							request.getSession().setAttribute("USER_ID", user_id);
+							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+							
+						}
+						
+						user_id.add(mason.getUser_id());
+						user_firstname.add(mason.getUser_firstname());
+						
+						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+						
+						return "redirect:/masonUI.jsp";
+						
+					} else {
+						return "redirect:/login.jsp";
+					}
+					
+			 case "carpenter":  
+					User carpenter = service.getUser(username, password);
+					if(carpenter!=null && carpenter.getUser_status().equals("approved") && carpenter.getUser_role().equals("carpenter")) {
+						
+						//Save Sessions
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+						
+						if (user_id == null || user_firstname == null) {
+							user_id = new ArrayList<>();
+							user_firstname = new ArrayList<>();
+							
+							request.getSession().setAttribute("USER_ID", user_id);
+							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+							
+						}
+						
+						user_id.add(carpenter.getUser_id());
+						user_firstname.add(carpenter.getUser_firstname());
+						
+						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+						
+						return "redirect:/carpenterUI.jsp";
+						
+					} else {
+						return "redirect:/login.jsp";
+					}
+					
+			 case "security":  
+					User security = service.getUser(username, password);
+					if(security!=null && security.getUser_status().equals("approved") && security.getUser_role().equals("security")) {
+						
+						//Save Sessions
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+						
+						if (user_id == null || user_firstname == null) {
+							user_id = new ArrayList<>();
+							user_firstname = new ArrayList<>();
+							
+							request.getSession().setAttribute("USER_ID", user_id);
+							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+							
+						}
+						
+						user_id.add(security.getUser_id());
+						user_firstname.add(security.getUser_firstname());
+						
+						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+						
+						return "redirect:/securityUI.jsp";
+						
+					} else {
+						return "redirect:/login.jsp";
+					}
+					
+			 case "electrician":  
+					User electrician = service.getUser(username, password);
+					if(electrician!=null && electrician.getUser_status().equals("approved") && electrician.getUser_role().equals("electrician")) {
+						
+						//Save Sessions
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_id = (ArrayList<Object>) request.getSession().getAttribute("USER_ID");
+						@SuppressWarnings("unchecked")
+						ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession().getAttribute("USER_FIRSTNAME");
+						
+						if (user_id == null || user_firstname == null) {
+							user_id = new ArrayList<>();
+							user_firstname = new ArrayList<>();
+							
+							request.getSession().setAttribute("USER_ID", user_id);
+							request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+							
+						}
+						
+						user_id.add(electrician.getUser_id());
+						user_firstname.add(electrician.getUser_firstname());
+						
+						request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
+						request.getSession().setAttribute("USER_FIRSTNAME", user_firstname.toString().replace("[", "").replace("]", ""));
+						
+						return "redirect:/electricianUI.jsp";
+						
+					} else {
+						return "redirect:/login.jsp";
+					}
+					
 			   	default:  
 			    return "redirect:/login.jsp";  
 		 }
@@ -304,7 +428,7 @@ public class HallsController {
 		complaint.setComplaint_category("mason");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/custodianUI.jsp";
+		return "redirect:/categorizedComplaints.jsp";
 		
 	}
 	
@@ -317,7 +441,7 @@ public class HallsController {
 		complaint.setComplaint_category("plumber");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/custodianUI.jsp";
+		return "redirect:/categorizedComplaints.jsp";
 		
 	}
 	
@@ -330,7 +454,7 @@ public class HallsController {
 		complaint.setComplaint_category("carpenter");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/custodianUI.jsp";
+		return "redirect:/categorizedComplaints.jsp";
 		
 	}
 	
@@ -342,7 +466,7 @@ public class HallsController {
 		complaint.setComplaint_category("security");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/custodianUI.jsp";
+		return "redirect:/categorizedComplaints.jsp";
 		
 	}
 	
@@ -355,13 +479,13 @@ public class HallsController {
 		complaint.setComplaint_category("electrician");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/custodianUI.jsp";
+		return "redirect:/categorizedComplaints.jsp";
 		
 	}
 	
 	//Claim complaint by Plumber	
 		@RequestMapping(value="plumberUI.jsp/plumber/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			public String claimComplaintPlumber(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
 			complaint.setComplaint_status("claimed");
@@ -372,9 +496,64 @@ public class HallsController {
 			
 		}
 		
+		
+	//Claim complaint by Mason	
+		@RequestMapping(value="masonUI.jsp/mason/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String claimComplaintMason(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_claimed_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/masonClaimedComplaints.jsp";
+			
+		}
+		
+		
+	//Claim complaint by Carpenter	
+		@RequestMapping(value="carpenterUI.jsp/carpenter/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String claimComplaintCarpenter(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_claimed_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/carpenterClaimedComplaints.jsp";
+			
+		}
+		
+	//Claim complaint by Security	
+		@RequestMapping(value="securityUI.jsp/security/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String claimComplaintSecurity(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_claimed_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/securityClaimedComplaints.jsp";
+			
+		}
+		
+		
+	//Claim complaint by Electrician	
+		@RequestMapping(value="electricianUI.jsp/electrician/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String claimComplaintElectrician(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_claimed_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/electricianClaimedComplaints.jsp";
+			
+		}
+		
 	//Unclaim complaint by Plumber	
 		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			public String unclaimComplaintPlumber(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
 			complaint.setComplaint_status("approved");
@@ -386,9 +565,64 @@ public class HallsController {
 		}
 		
 		
+	//Unclaim complaint by Mason	
+		@RequestMapping(value="masonClaimedComplaints.jsp/mason/unclaim/{complaint_id}", method=RequestMethod.GET)
+			public String unclaimComplaintMason(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_claimed_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/masonUI.jsp";
+			
+		}
+		
+		
+	//Unclaim complaint by Carpenter	
+		@RequestMapping(value="carpenterClaimedComplaints.jsp/carpenter/unclaim/{complaint_id}", method=RequestMethod.GET)
+			public String unclaimComplaintCarpenter(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_claimed_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/carpenterUI.jsp";
+			
+		}
+		
+		
+	//Unclaim complaint by Security	
+		@RequestMapping(value="securityClaimedComplaints.jsp/security/unclaim/{complaint_id}", method=RequestMethod.GET)
+			public String unclaimComplaintSecurity(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_claimed_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/securityUI.jsp";
+			
+		}
+	
+		
+	//Unclaim complaint by Electrician	
+		@RequestMapping(value="electricianClaimedComplaints.jsp/electrician/unclaim/{complaint_id}", method=RequestMethod.GET)
+			public String unclaimComplaintElectrician(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("approved");
+			complaint.setComplaint_claimed_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/electricianUI.jsp";
+			
+		}
+	
 	//Done complaint by Plumber	
 		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String doneComplaint(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			public String doneComplaintPlumber(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
 			complaint.setComplaint_status("done");
@@ -399,9 +633,63 @@ public class HallsController {
 			
 		}
 		
+	//Done complaint by Mason
+		@RequestMapping(value="masonClaimedComplaints.jsp/mason/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String doneComplaintMason(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/masonDoneComplaints.jsp";
+			
+		}
+		
+		
+	//Done complaint by Carpenter
+		@RequestMapping(value="carpenterClaimedComplaints.jsp/carpenter/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String doneComplaintCarpenter(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/carpenterDoneComplaints.jsp";
+			
+		}
+		
+		
+	//Done complaint by Security
+		@RequestMapping(value="securityClaimedComplaints.jsp/security/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String doneComplaintSecurity(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/securityDoneComplaints.jsp";
+			
+		}
+		
+	//Done complaint by Electrician
+		@RequestMapping(value="electricianClaimedComplaints.jsp/electrician/done/{complaint_id}/{user_id}", method=RequestMethod.GET)
+			public String doneComplaintElectrician(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("done");
+			complaint.setComplaint_done_by(userID);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/electricianDoneComplaints.jsp";
+			
+		}
+		
 	//Undo complaint by Plumber	
 		@RequestMapping(value="plumberDoneComplaints.jsp/plumber/undo/{complaint_id}", method=RequestMethod.GET)
-			public String undoComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			public String undoComplaintPlumber(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
 			
 			Complaint complaint = service.getComplaint(complaintId);
 			complaint.setComplaint_status("claimed");
@@ -409,6 +697,61 @@ public class HallsController {
 			service.saveComplaint(complaint);
 			
 			return "redirect:/plumberClaimedComplaints.jsp";
+			
+		}
+		
+		
+	//Undo complaint by Mason	
+		@RequestMapping(value="masonDoneComplaints.jsp/mason/undo/{complaint_id}", method=RequestMethod.GET)
+			public String undoComplaintMason(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_done_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/masonClaimedComplaints.jsp";
+			
+		}
+		
+		
+	//Undo complaint by Carpenter	
+		@RequestMapping(value="carpenterDoneComplaints.jsp/carpenter/undo/{complaint_id}", method=RequestMethod.GET)
+			public String undoComplaintCarpenter(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_done_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/carpenterClaimedComplaints.jsp";
+			
+		}
+		
+	//Undo complaint by Security	
+		@RequestMapping(value="securityDoneComplaints.jsp/security/undo/{complaint_id}", method=RequestMethod.GET)
+			public String undoComplaintSecurity(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_done_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/securityClaimedComplaints.jsp";
+			
+		}
+		
+		
+	//Undo complaint by Electrician	
+		@RequestMapping(value="electricianDoneComplaints.jsp/electrician/undo/{complaint_id}", method=RequestMethod.GET)
+			public String undoComplaintElectrician(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+			
+			Complaint complaint = service.getComplaint(complaintId);
+			complaint.setComplaint_status("claimed");
+			complaint.setComplaint_done_by(0);
+			service.saveComplaint(complaint);
+			
+			return "redirect:/electricianClaimedComplaints.jsp";
 			
 		}
 		

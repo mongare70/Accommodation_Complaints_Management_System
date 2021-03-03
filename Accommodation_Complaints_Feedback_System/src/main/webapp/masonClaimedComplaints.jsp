@@ -1,7 +1,8 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
-<button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='hallsOfficerUI.jsp'">Back</button>
+<button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='masonUI.jsp'">Back</button>
+			<br>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -24,8 +25,7 @@
 			Statement statement = null;
 			ResultSet resultSet = null;
 			%>
-			
-			<h1 style="text-align: center;"> List of Complaints Rejected By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
+			<h1 style="text-align: center;"> List of Complaints Claimed By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
 			<table class="table table-bordered table-hover">
 
 			<tr>
@@ -34,17 +34,16 @@
 				<td>Complaint Author ID</td>
 				<td>Complaint Status</td>
 				<td>Complaint Category</td>
-				<td>Complaint Approved/Rejected By:</td>
-				<td>Complaint Done By:</td>
-				<td>Approve</td>
-				<td>Reject</td>
+				<td>Complaint Claimed By:</td>
+				<td>Unclaim Complaint</td>
+				<td>Done Complaint?</td>
     		</tr>
 
 			<%
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'rejected' AND complaint_approved_or_rejected_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'claimed' AND complaint_category = 'mason' AND complaint_claimed_by = "+ session.getAttribute("USER_ID") +" AND complaint_done_by = 0 ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -55,10 +54,9 @@
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
-		    	<td><a href='hallsOfficerUI.jsp/approve/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Approve</a></td>
-		    	<td><a href='hallsOfficerUI.jsp/reject/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Reject</a></td>
+		    	<td><%out.println(resultSet.getString("complaint_claimed_by")); %></td>
+		    	<td><a href='masonClaimedComplaints.jsp/mason/unclaim/<%out.println(resultSet.getString("complaint_id")); %>'>Unclaim</a></td>
+				<td><a href='masonClaimedComplaints.jsp/mason/done/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Yes</a></td>
 			</tr>
 
 			<%

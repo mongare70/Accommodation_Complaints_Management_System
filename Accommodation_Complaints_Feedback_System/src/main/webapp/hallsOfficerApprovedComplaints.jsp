@@ -29,7 +29,6 @@
 			<table class="table table-bordered table-hover">
 
 			<tr>
-				<td>Complaint ID</td>
 				<td>Complaint Title</td>
 				<td>Complaint Content</td>
 				<td>Complaint Author ID</td>
@@ -51,7 +50,6 @@
 			while(resultSet.next()){
 			%>
 			<tr>
-				<td><%out.println(resultSet.getString("complaint_id")); %></td>
 				<td><%out.println(resultSet.getString("complaint_title")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
