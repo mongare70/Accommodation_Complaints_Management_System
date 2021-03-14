@@ -39,6 +39,9 @@
 			            <option value="plumber">Plumber</option>
 			            <option value="mason">Mason</option>
 			            <option value="security">Security</option>
+			            <option value="cleaner">Cleaner</option>
+			            <option value="health">Health</option>
+			            <option value="painter">Painter</option>
 		        	</select>
                 </div>
                 

@@ -42,6 +42,10 @@
 				<td>Set Category to:</td>
 				<td>Set Category to:</td>
 				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
+				<td>Set Category to:</td>
     		</tr>
 
 			<%
@@ -67,6 +71,10 @@
 		    	<td><a href='custodianUI.jsp/carpenter/<%out.println(resultSet.getString("complaint_id")); %>'>Carpenter</a></td>
 		    	<td><a href='custodianUI.jsp/security/<%out.println(resultSet.getString("complaint_id")); %>'>Security</a></td>
 		    	<td><a href='custodianUI.jsp/electrician/<%out.println(resultSet.getString("complaint_id")); %>'>Electrician</a></td>
+				<td><a href='custodianUI.jsp/health/<%out.println(resultSet.getString("complaint_id")); %>'>Health</a></td>
+		    	<td><a href='custodianUI.jsp/painter/<%out.println(resultSet.getString("complaint_id")); %>'>Painter</a></td>
+		    	<td><a href='custodianUI.jsp/cleaner/<%out.println(resultSet.getString("complaint_id")); %>'>Cleaner</a></td>
+		    	<td><a href='custodianUI.jsp/custodian/<%out.println(resultSet.getString("complaint_id")); %>'>Custodian</a></td>
 			</tr>
 
 			<%

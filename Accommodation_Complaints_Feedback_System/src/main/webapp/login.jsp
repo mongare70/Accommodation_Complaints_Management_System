@@ -19,6 +19,9 @@
 	                        <option value="security">Security</option>
 	                        <option value="plumber">Plumber</option>
 	                        <option value="electrician">Electrician</option>
+	                        <option value="cleaner">Cleaner</option>
+	                        <option value="health">Health</option>
+	                        <option value="painter">Painter</option>
 	                    </select>
 	                </div>
 	                  <div class="form-group">
