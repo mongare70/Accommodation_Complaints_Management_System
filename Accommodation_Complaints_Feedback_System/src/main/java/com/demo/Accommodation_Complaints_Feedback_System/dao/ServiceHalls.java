@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
+import com.demo.Accommodation_Complaints_Feedback_System.model.Report;
 import com.demo.Accommodation_Complaints_Feedback_System.repository.ComplaintRepository;
+import com.demo.Accommodation_Complaints_Feedback_System.repository.ReportRepository;
 import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 
 
@@ -17,9 +19,16 @@ public class ServiceHalls {
 	
 	@Autowired
 	ComplaintRepository complaint_repository;
-	 
+	
+	@Autowired
+	ReportRepository report_repository;
+	
 	@Autowired
 	ObjectMapper objectMapper;
+	
+	public void saveReport(Report report) {
+		report_repository.save(report);
+	}
 	
 	public void saveUser(User user) {
 	 	user_repository.save(user);
@@ -49,6 +58,10 @@ public class ServiceHalls {
 	
 	public void deleteComplaint(int cid) {
 		complaint_repository.deleteById(cid);
+	}
+	
+	public void deleteReport(int report_id) {
+		report_repository.deleteById(report_id);
 	}
 	
 }

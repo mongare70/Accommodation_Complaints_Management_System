@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.demo.Accommodation_Complaints_Feedback_System.dao.ServiceHalls;
 import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
+import com.demo.Accommodation_Complaints_Feedback_System.model.Report;
 
 @Controller
 public class HallsController {
@@ -474,7 +475,7 @@ public class HallsController {
 	}
 
 	@PostMapping("/submitComplaint")
-	public String submitComplaint(@RequestParam String complaint_title, @RequestParam String complaint_content, @RequestParam int complaint_author_id, Model model){
+	public String submitComplaint(@RequestParam String complaint_title, @RequestParam String complaint_content, @RequestParam int complaint_author_id){
 		
 		Complaint complaint =new Complaint();
 		complaint.setComplaint_title(complaint_title);
@@ -483,6 +484,18 @@ public class HallsController {
 		
 		service.saveComplaint(complaint);
 		return "redirect:/studentUI.jsp";
+	}
+	
+	@PostMapping("/submitReport")
+	public String submitReport(@RequestParam String report_title, @RequestParam String report_content, @RequestParam int report_author_id, @RequestParam int student_id){
+		Report report = new Report();
+		report.setStudent_id(student_id);
+		report.setReport_title(report_title);
+		report.setReport_content(report_content);
+		report.setReport_author_id(report_author_id);
+		
+		service.saveReport(report);
+		return "redirect:/reports.jsp";
 	}
 				
 	//approve complaint
@@ -1124,4 +1137,28 @@ public class HallsController {
 	
 	}
 	
+	//Report Student
+	@RequestMapping(value="users.jsp/report/{userId}", method=RequestMethod.GET)
+	public String reportUser(@PathVariable("userId") int userId, Map<String, Object> map, Model model) {
+		model.addAttribute("userId", userId);
+		return "/reportStudentUI.jsp";
+	
+	}
+	
+	//delete report by Custodian
+	@RequestMapping(value="reports.jsp/delete/{reportId}", method=RequestMethod.GET)
+	public String deleteReportCustodian(@PathVariable("reportId") int reportId, Map<String, Object> map) {
+		service.deleteReport(reportId);;
+		return "redirect:/reports.jsp";
+	
+	}
+	
+	//delete report by Admin
+	@RequestMapping(value="/reports.jsp/admindelete/{reportId}", method=RequestMethod.GET)
+	public String deleteReportAdmin(@PathVariable("reportId") int reportId, Map<String, Object> map) {
+		service.deleteReport(reportId);;
+		return "redirect:/admin/reports.jsp";
+	
+	}
+
 }

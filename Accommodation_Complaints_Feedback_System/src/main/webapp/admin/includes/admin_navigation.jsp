@@ -23,6 +23,9 @@
 	        <li><a class="dropdown-item" href="/admin/securitys.jsp">Security</a></li>
 	        <li><a class="dropdown-item" href="/admin/plumbers.jsp">Plumbers</a></li>
 	        <li><a class="dropdown-item" href="/admin/admins.jsp">Admins</a></li>
+	        <li><a class="dropdown-item" href="/admin/painters.jsp">Painters</a></li>
+	        <li><a class="dropdown-item" href="/admin/health.jsp">Health Staff</a></li>
+	        <li><a class="dropdown-item" href="/admin/cleaners.jsp">Cleaners</a></li>
 	        <li><a class="dropdown-item" href="/admin/users.jsp">All Users</a></li>
           </ul>
         </li>
@@ -35,6 +38,9 @@
           	<li><a class="dropdown-item" href="/admin/rejectedComplaints.jsp">Rejected Complaints</a></li>
 	      	<li><a class="dropdown-item" href="/admin/complaints.jsp">All Complaints</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link default" aria-current="page" href="/admin/reports.jsp">Reports</a>
         </li>
       </ul>
     </div>

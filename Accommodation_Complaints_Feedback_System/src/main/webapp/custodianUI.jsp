@@ -5,6 +5,8 @@
 	<br>
 	<button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/custodianWorkspace.jsp'">Click Here To Go To Custodian Workspace</button>
 	<br>
+	<button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/users.jsp'">Report Student</button>
+	<br>
 
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
