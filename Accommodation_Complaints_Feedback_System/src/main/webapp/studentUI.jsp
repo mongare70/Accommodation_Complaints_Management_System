@@ -14,6 +14,10 @@
                     <label for="complaint_title">Complaint Title:</label>
                     <input type="text" class="form-control" id="complaint_title" name="complaint_title" placeholder="Complaint Title">
                   </div>
+                  
+                  	<h3 style = "color: red;">Warning!!!</h3>
+		 			<p style = "color: red;">Make sure you include your room and block that you live in, in the Complaint Content or else the complaint will be rejected!!!</p>
+                  
                   <div class="form-group">
                     <label for="complaint_content">Complaint Content:</label>
                     <textarea rows="5" cols="50" class="form-control" id="complaint_content" name="complaint_content" placeholder="Complaint Content"></textarea>
