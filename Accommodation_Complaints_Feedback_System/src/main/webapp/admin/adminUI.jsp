@@ -3,7 +3,7 @@
 	<div class="container-fluid bg">
 		<div class="container">
 			<h1>Welcome <%=session.getAttribute("USER_FIRSTNAME")%></h1>	         
-            <button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/admin/register_admin.jsp'">Register New Admin</button>
+            <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/admin/register_user.jsp'">Register User</button>
 		</div>
 	</div>
 <%@ include file="/admin/includes/admin_footer.jsp" %>

@@ -33,43 +33,51 @@ public class HallsController {
 	
 	//register new user
 	@PostMapping("/register_user")
-	String addStudent(User user) {
+	public String addUser(@RequestParam String user_number, @RequestParam String user_firstname, @RequestParam String user_lastname, @RequestParam String username, @RequestParam String user_email, @RequestParam String user_role, @RequestParam String user_hostel, @RequestParam String user_block, @RequestParam String user_room_number, @RequestParam String password) {
+		User user = new User();
+		if(user_hostel == "" && user_block == "" && user_room_number == "") {
+			user.setUser_number(user_number);
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_role(user_role);
+			user.setUser_hostel("");
+			user.setUser_block("");
+			user.setUser_room_number(0);
+			user.setPassword(password);
+			
+			service.saveUser(user);
+			
+		} else if(user_room_number == "") {
+			user.setUser_number(user_number);
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_role(user_role);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setUser_room_number(0);
+			user.setPassword(password);
+			
+			service.saveUser(user);
+		} else {
+			user.setUser_number(user_number);
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_role(user_role);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setUser_room_number(Integer.parseInt(user_room_number));
+			user.setPassword(password);
+			
+			service.saveUser(user);
+		}
 		
-		service.saveUser(user);
-		return "redirect:/login.jsp";
-	}
-	
-	
-	//register new admin
-	@PostMapping("/register_admin")
-	String addAdmin(User user) {
-		
-		service.saveUser(user);
-		return "redirect:/admin/adminUI.jsp";
-	}
-	
-	//approve user
-	@RequestMapping(value="admin/users.jsp/approved/{userId}", method=RequestMethod.GET)
-		public String approve(@PathVariable("userId") int userId, Map<String, Object> map) {
-		
-		User user = service.getUser(userId);
-		user.setUser_status("approved");
-		service.saveUser(user);
-		
-		return "redirect:/admin/users.jsp";
-		
-	}
-	
-	//unapprove user
-	@RequestMapping(value="admin/users.jsp/unapproved/{userId}", method=RequestMethod.GET)
-	public String unapprove(@PathVariable("userId") int userId, Map<String, Object> map) {
-	
-		User user = service.getUser(userId);
-		user.setUser_status("unapproved");
-		service.saveUser(user);
-		
-		return "redirect:/admin/users.jsp";
-	
+		return "redirect:/admin/register_user.jsp";
 	}
 	
 	//delete user
@@ -87,7 +95,7 @@ public class HallsController {
 		 switch (user_role) {  
 			 case "admin":  
 				User admin = service.getUser(username, password);
-				if(admin!=null && admin.getUser_status().equals("approved") && admin.getUser_role().equals("admin")) {
+				if(admin!=null && admin.getUser_role().equals("admin")) {
 					
 					//Save Sessions
 					@SuppressWarnings("unchecked")
@@ -119,7 +127,7 @@ public class HallsController {
 				
 			 case "student":  
 					User student = service.getUser(username, password);
-					if(student!=null && student.getUser_status().equals("approved") && student.getUser_role().equals("student")) {
+					if(student!=null && student.getUser_role().equals("student")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -151,7 +159,7 @@ public class HallsController {
 				
 			 case "halls_officer":  
 					User halls_officer = service.getUser(username, password);
-					if(halls_officer!=null && halls_officer.getUser_status().equals("approved") && halls_officer.getUser_role().equals("halls_officer")) {
+					if(halls_officer!=null && halls_officer.getUser_role().equals("halls_officer")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -182,7 +190,7 @@ public class HallsController {
 				
 			 case "custodian":  
 					User custodian = service.getUser(username, password);
-					if(custodian!=null && custodian.getUser_status().equals("approved") && custodian.getUser_role().equals("custodian")) {
+					if(custodian!=null && custodian.getUser_role().equals("custodian")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -215,7 +223,7 @@ public class HallsController {
 					
 			 case "plumber":  
 					User plumber = service.getUser(username, password);
-					if(plumber!=null && plumber.getUser_status().equals("approved") && plumber.getUser_role().equals("plumber")) {
+					if(plumber!=null && plumber.getUser_role().equals("plumber")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -246,7 +254,7 @@ public class HallsController {
 					
 			 case "mason":  
 					User mason = service.getUser(username, password);
-					if(mason!=null && mason.getUser_status().equals("approved") && mason.getUser_role().equals("mason")) {
+					if(mason!=null && mason.getUser_role().equals("mason")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -277,7 +285,7 @@ public class HallsController {
 					
 			 case "carpenter":  
 					User carpenter = service.getUser(username, password);
-					if(carpenter!=null && carpenter.getUser_status().equals("approved") && carpenter.getUser_role().equals("carpenter")) {
+					if(carpenter!=null && carpenter.getUser_role().equals("carpenter")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -308,7 +316,7 @@ public class HallsController {
 					
 			 case "security":  
 					User security = service.getUser(username, password);
-					if(security!=null && security.getUser_status().equals("approved") && security.getUser_role().equals("security")) {
+					if(security!=null && security.getUser_role().equals("security")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -339,7 +347,7 @@ public class HallsController {
 					
 			 case "electrician":  
 					User electrician = service.getUser(username, password);
-					if(electrician!=null && electrician.getUser_status().equals("approved") && electrician.getUser_role().equals("electrician")) {
+					if(electrician!=null && electrician.getUser_role().equals("electrician")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -370,7 +378,7 @@ public class HallsController {
 					
 			 case "cleaner":  
 					User cleaner = service.getUser(username, password);
-					if(cleaner!=null && cleaner.getUser_status().equals("approved") && cleaner.getUser_role().equals("cleaner")) {
+					if(cleaner!=null && cleaner.getUser_role().equals("cleaner")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -401,7 +409,7 @@ public class HallsController {
 					
 			 case "health":  
 					User health = service.getUser(username, password);
-					if(health!=null && health.getUser_status().equals("approved") && health.getUser_role().equals("health")) {
+					if(health!=null && health.getUser_role().equals("health")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")
@@ -432,7 +440,7 @@ public class HallsController {
 					
 			 case "painter":  
 					User painter = service.getUser(username, password);
-					if(painter!=null && painter.getUser_status().equals("approved") && painter.getUser_role().equals("painter")) {
+					if(painter!=null && painter.getUser_role().equals("painter")) {
 						
 						//Save Sessions
 						@SuppressWarnings("unchecked")

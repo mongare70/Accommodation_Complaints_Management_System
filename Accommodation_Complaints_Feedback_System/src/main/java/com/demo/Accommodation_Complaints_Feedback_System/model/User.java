@@ -1,5 +1,7 @@
 package com.demo.Accommodation_Complaints_Feedback_System.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -36,12 +39,42 @@ public class User {
 	@NotBlank
 	private String user_role;
 	
-	@NotBlank
-	public String user_status = "unapproved";
+	private String user_hostel;
+	
+	private String user_block;
+	
+	private int user_room_number;
+	
+	@CreatedDate
+	private Date createdAt;
 	
 	@NotBlank
 	private String password;
 	
+	
+	public String getUser_hostel() {
+		return user_hostel;
+	}
+
+	public void setUser_hostel(String user_hostel) {
+		this.user_hostel = user_hostel;
+	}
+
+	public String getUser_block() {
+		return user_block;
+	}
+
+	public void setUser_block(String user_block) {
+		this.user_block = user_block;
+	}
+
+	public int getUser_room_number() {
+		return user_room_number;
+	}
+
+	public void setUser_room_number(int user_room_number) {
+		this.user_room_number = user_room_number;
+	}
 
 	public int getUser_id() {
 		return user_id;
@@ -99,14 +132,6 @@ public class User {
 		this.user_role = user_role;
 	}
 
-	public String getUser_status() {
-		return user_status;
-	}
-
-	public void setUser_status(String user_status) {
-		this.user_status = user_status;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -119,7 +144,9 @@ public class User {
 	public String toString() {
 		return "User [user_id=" + user_id + ", user_number=" + user_number + ", user_firstname=" + user_firstname
 				+ ", user_lastname=" + user_lastname + ", username=" + username + ", user_email=" + user_email
-				+ ", user_role=" + user_role + ", user_status=" + user_status + ", password=" + password + "]";
+				+ ", user_role=" + user_role + ", user_hostel=" + user_hostel + ", user_block=" + user_block
+				+ ", user_room_number=" + user_room_number + ", password=" + password + "]";
 	}
+
 	
 }

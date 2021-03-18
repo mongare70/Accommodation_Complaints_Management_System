@@ -33,7 +33,6 @@
 	                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
 	                  </div>
 	                  <button type="submit" class="btn btn-success btn-block">Submit</button>
-	                  <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='register_user.jsp'">Register Here</button>
 	            </form>
 				<!-- Form End-->
 			</div>

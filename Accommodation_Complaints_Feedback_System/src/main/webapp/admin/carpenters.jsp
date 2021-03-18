@@ -30,15 +30,13 @@
 
 			<tr>
 				<td>User ID</td>
-				<td>Staff Number/Registration Number </td>
+				<td>Staff Number</td>
 				<td>Firstname</td>
 				<td>Lastname</td>
 				<td>Username</td>
 				<td>Email</td>
 				<td>User Role</td>
-				<td>User Status</td>
-				<td>Approve</td>
-				<td>Unapprove</td>
+				<td>Created At</td>
 				<td>Delete</td>
     		</tr>
 
@@ -60,9 +58,7 @@
 		    	<td><%out.println(resultSet.getString("username")); %></td>
 		    	<td><%out.println(resultSet.getString("user_email")); %></td>
 		    	<td><%out.println(resultSet.getString("user_role")); %></td>
-		    	<td><%out.println(resultSet.getString("user_status")); %></td>
-		    	<td><a href='users.jsp/approved/<%out.println(resultSet.getString("user_id")); %>'>approve</a></td>
-		    	<td><a href='users.jsp/unapproved/<%out.println(resultSet.getString("user_id")); %>'>unapprove</a></td>
+		    	<td><%out.println(resultSet.getString("created_at")); %></td>
 		    	<td><a href='users.jsp/delete/<%out.println(resultSet.getString("user_id")); %>'>Delete</a></td>
 			</tr>
 
