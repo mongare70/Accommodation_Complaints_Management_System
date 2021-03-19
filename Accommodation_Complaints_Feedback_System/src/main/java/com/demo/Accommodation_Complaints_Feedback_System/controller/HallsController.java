@@ -483,10 +483,10 @@ public class HallsController {
 	}
 
 	@PostMapping("/submitComplaint")
-	public String submitComplaint(@RequestParam String complaint_title, @RequestParam String complaint_content, @RequestParam int complaint_author_id){
+	public String submitComplaint(@RequestParam String complaint_category, @RequestParam String complaint_content, @RequestParam int complaint_author_id){
 		
 		Complaint complaint =new Complaint();
-		complaint.setComplaint_title(complaint_title);
+		complaint.setComplaint_category(complaint_category);
 		complaint.setComplaint_content(complaint_content);
 		complaint.setComplaint_author_id(complaint_author_id);
 		
@@ -547,15 +547,39 @@ public class HallsController {
 	}
 	
 	
-	//Set complaint category to Plumber
+	//Assign Complaint To Plumber Link
 	@RequestMapping(value="custodianUI.jsp/plumber/{complaint_id}", method=RequestMethod.GET)
-		public String setCategoryToPlumber(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
+		public String assignComplaintToPlumberLink(@PathVariable("complaint_id") int complaintId, Map<String, Object> map, Model model) {
 		
-		Complaint complaint = service.getComplaint(complaintId);
-		complaint.setComplaint_category("plumber");
+		model.addAttribute("complaintId", complaintId);
+		return "/assignToPlumber.jsp";
+		
+	}
+	
+	//Assign complaint To Plumber Request
+	@PostMapping("/assignToPlumber")
+	public String assignComplaintToPlumber(@RequestParam int complaint_id, @RequestParam int complaint_assigned_to, @RequestParam int complaint_assigned_by){
+		
+		Complaint complaint = service.getComplaint(complaint_id);
+		complaint.setComplaint_assigned_to(complaint_assigned_to);
+		complaint.setComplaint_assigned_by(complaint_assigned_by);
+		complaint.setComplaint_status("assigned");
 		service.saveComplaint(complaint);
 		
-		return "redirect:/categorizedComplaints.jsp";
+		return "redirect:/assignedComplaints.jsp";
+	}
+	
+	//Unassign Complaint
+	@RequestMapping(value="assignedComplaints.jsp/unassign/{complaint_id}", method=RequestMethod.GET)
+		public String unassignComplaint(@PathVariable("complaint_id") int complaintId, Map<String, Object> map, Model model) {
+		
+		Complaint complaint = service.getComplaint(complaintId);
+		complaint.setComplaint_assigned_to(0);
+		complaint.setComplaint_assigned_by(0);
+		complaint.setComplaint_status("approved");
+		service.saveComplaint(complaint);
+		
+		return "redirect:/assignedComplaints.jsp";
 		
 	}
 	
@@ -644,249 +668,6 @@ public class HallsController {
 		return "redirect:/categorizedComplaints.jsp";
 		
 	}
-	
-	//Claim complaint by Plumber	
-		@RequestMapping(value="plumberUI.jsp/plumber/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintPlumber(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/plumberClaimedComplaints.jsp";
-			
-		}
-		
-		
-	//Claim complaint by Mason	
-		@RequestMapping(value="masonUI.jsp/mason/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintMason(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/masonClaimedComplaints.jsp";
-			
-		}
-		
-		
-	//Claim complaint by Carpenter	
-		@RequestMapping(value="carpenterUI.jsp/carpenter/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintCarpenter(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/carpenterClaimedComplaints.jsp";
-			
-		}
-		
-	//Claim complaint by Security	
-		@RequestMapping(value="securityUI.jsp/security/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintSecurity(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/securityClaimedComplaints.jsp";
-			
-		}
-		
-		
-	//Claim complaint by Electrician	
-		@RequestMapping(value="electricianUI.jsp/electrician/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintElectrician(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/electricianClaimedComplaints.jsp";
-			
-		}
-		
-	//Claim complaint by Cleaner	
-		@RequestMapping(value="cleanerUI.jsp/cleaner/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintCleaner(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/cleanerClaimedComplaints.jsp";
-			
-		}
-		
-	//Claim complaint by Health	
-		@RequestMapping(value="healthUI.jsp/health/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintHealth(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/healthClaimedComplaints.jsp";
-			
-		}
-		
-		
-	//Claim complaint by Painter
-		@RequestMapping(value="painterUI.jsp/painter/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintPainter(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/painterClaimedComplaints.jsp";
-			
-		}
-		
-	//Claim complaint by Custodian
-		@RequestMapping(value="custodianWorkspace.jsp/custodian/claim/{complaint_id}/{user_id}", method=RequestMethod.GET)
-			public String claimComplaintCustodian(@PathVariable("complaint_id") int complaintId, @PathVariable("user_id") int userID, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("claimed");
-			complaint.setComplaint_claimed_by(userID);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/custodianClaimedComplaints.jsp";
-			
-		}
-		
-	//Unclaim complaint by Plumber	
-		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintPlumber(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/plumberUI.jsp";
-			
-		}
-		
-		
-	//Unclaim complaint by Mason	
-		@RequestMapping(value="masonClaimedComplaints.jsp/mason/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintMason(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/masonUI.jsp";
-			
-		}
-		
-		
-	//Unclaim complaint by Carpenter	
-		@RequestMapping(value="carpenterClaimedComplaints.jsp/carpenter/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintCarpenter(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/carpenterUI.jsp";
-			
-		}
-		
-		
-	//Unclaim complaint by Security	
-		@RequestMapping(value="securityClaimedComplaints.jsp/security/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintSecurity(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/securityUI.jsp";
-			
-		}
-	
-		
-	//Unclaim complaint by Electrician	
-		@RequestMapping(value="electricianClaimedComplaints.jsp/electrician/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintElectrician(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/electricianUI.jsp";
-			
-		}
-		
-	//Unclaim complaint by Cleaner	
-		@RequestMapping(value="cleanerClaimedComplaints.jsp/cleaner/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintCleaner(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/cleanerUI.jsp";
-			
-		}
-	
-		
-	//Unclaim complaint by Health	
-		@RequestMapping(value="healthClaimedComplaints.jsp/health/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintHealth(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/healthUI.jsp";
-			
-		}
-		
-	//Unclaim complaint by Painter	
-		@RequestMapping(value="painterClaimedComplaints.jsp/painter/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintPainter(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/painterUI.jsp";
-			
-		}
-		
-	//Unclaim complaint by Custodian	
-		@RequestMapping(value="custodianClaimedComplaints.jsp/custodian/unclaim/{complaint_id}", method=RequestMethod.GET)
-			public String unclaimComplaintCustodian(@PathVariable("complaint_id") int complaintId, Map<String, Object> map) {
-			
-			Complaint complaint = service.getComplaint(complaintId);
-			complaint.setComplaint_status("approved");
-			complaint.setComplaint_claimed_by(0);
-			service.saveComplaint(complaint);
-			
-			return "redirect:/custodianWorkspace.jsp";
-			
-		}
 				
 	//Done complaint by Plumber	
 		@RequestMapping(value="plumberClaimedComplaints.jsp/plumber/done/{complaint_id}/{user_id}", method=RequestMethod.GET)

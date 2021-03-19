@@ -43,16 +43,8 @@
 	</div>
 	<script type="text/javascript">
 	 function formValidate()                                    
-     { 
-         var complaint_title = document.forms["complaintForm"]["complaint_title"];               
+     {               
          var complaint_content = document.forms["complaintForm"]["complaint_content"];
-        
-         if (complaint_title.value == "")                                  
-         { 
-             window.alert("Please enter the Complaint Title."); 
-             complaint_title.focus(); 
-             return false; 
-         } 
 
          if (complaint_content.value == "")                                  
          { 

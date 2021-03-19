@@ -1,11 +1,8 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
-
-	<button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/hallsOfficerApprovedComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'approved'</button>
-	<br>
-	<button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/hallsOfficerRejectedComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'rejected'</button>
- 	<br>
+<button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='custodianUI.jsp'">Back</button>
+			<br>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -28,24 +25,24 @@
 			Statement statement = null;
 			ResultSet resultSet = null;
 			%>
-			<h1 style="text-align: center;">List of 'pending' Complaints</h1>
+			<h1 style="text-align: center;"> List of Complaints Assigned By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
 			<table class="table table-bordered table-hover">
 
 			<tr>
 				<td>Complaint Category</td>
 				<td>Complaint Content</td>
-				<td>Complaint Author ID</td>
+				<td>Complaint Author: (ID)</td>
 				<td>Complaint Status</td>
-				<td>Complaint Approved/Rejected By:</td>
-				<td>Approve</td>
-				<td>Reject</td>
+				<td>Complaint Assigned To (ID):</td>
+				<td>Complaint Done By: (ID)</td>
+				<td>Unassign Complaint</td>
     		</tr>
 
 			<%
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'pending' ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'assigned' AND complaint_assigned_by = "+ session.getAttribute("USER_ID") +" ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -55,9 +52,9 @@
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
-		    	<td><a href='hallsOfficerUI.jsp/approve/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Approve</a></td>
-		    	<td><a href='hallsOfficerUI.jsp/reject/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Reject</a></td>
+		    	<td><%out.println(resultSet.getString("complaint_assigned_to")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
+		    	<td><a href='assignedComplaints.jsp/unassign/<%out.println(resultSet.getString("complaint_id")); %>'>Unassign</a></td>
 			</tr>
 
 			<%

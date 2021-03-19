@@ -18,8 +18,8 @@ public class Complaint {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int complaint_id;
 	
-	@NotBlank
-	private String complaint_title;
+	@NotBlank 
+	private String complaint_category;
 	
 	@NotBlank
 	private String complaint_content;
@@ -27,26 +27,31 @@ public class Complaint {
 	@NotBlank
 	private String complaint_status = "pending";
 	
-	@NotBlank 
-	private String complaint_category = "undefined";
-	
 	private int complaint_approved_or_rejected_by = 0;
 	
 	private int complaint_author_id;
 	
-	private int complaint_claimed_by = 0;
+	private int complaint_assigned_to = 0;
+	
+	private int complaint_assigned_by = 0;
 	
 	private int complaint_done_by = 0;
 
 	
-	
-
-	public int getComplaint_claimed_by() {
-		return complaint_claimed_by;
+	public int getComplaint_assigned_by() {
+		return complaint_assigned_by;
 	}
 
-	public void setComplaint_claimed_by(int complaint_claimed_by) {
-		this.complaint_claimed_by = complaint_claimed_by;
+	public void setComplaint_assigned_by(int complaint_assigned_by) {
+		this.complaint_assigned_by = complaint_assigned_by;
+	}
+
+	public int getComplaint_assigned_to() {
+		return complaint_assigned_to;
+	}
+
+	public void setComplaint_assigned_to(int complaint_assigned_to) {
+		this.complaint_assigned_to = complaint_assigned_to;
 	}
 
 	public int getComplaint_approved_or_rejected_by() {
@@ -81,14 +86,6 @@ public class Complaint {
 		this.complaint_id = complaint_id;
 	}
 
-	public String getComplaint_title() {
-		return complaint_title;
-	}
-
-	public void setComplaint_title(String complaint_title) {
-		this.complaint_title = complaint_title;
-	}
-
 	public String getComplaint_content() {
 		return complaint_content;
 	}
@@ -115,11 +112,11 @@ public class Complaint {
 
 	@Override
 	public String toString() {
-		return "Complaint [complaint_id=" + complaint_id + ", complaint_title=" + complaint_title
+		return "Complaint [complaint_id=" + complaint_id + ", complaint_category=" + complaint_category
 				+ ", complaint_content=" + complaint_content + ", complaint_status=" + complaint_status
-				+ ", complaint_category=" + complaint_category + ", complaint_approved_or_rejected_by="
-				+ complaint_approved_or_rejected_by + ", complaint_author_id=" + complaint_author_id
-				+ ", complaint_claimed_by=" + complaint_claimed_by + ", complaint_done_by=" + complaint_done_by + "]";
-	}	
+				+ ", complaint_approved_or_rejected_by=" + complaint_approved_or_rejected_by + ", complaint_author_id="
+				+ complaint_author_id + ", complaint_assigned_to=" + complaint_assigned_to + ", complaint_assigned_by="
+				+ complaint_assigned_by + ", complaint_done_by=" + complaint_done_by + "]";
+	}
 	
 }
