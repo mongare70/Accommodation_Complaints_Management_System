@@ -34,7 +34,7 @@
 				<td>Complaint Author ID</td>
 				<td>Complaint Status</td>
 				<td>Complaint Approved/Rejected By: (ID)</td>
-				<td>Complaint Claimed By: (ID)</td>
+				<td>Complaint Assigned To: (ID)</td>
 				<td>Complaint Done By: (ID)</td>
 				<td>Delete</td>
     		</tr>
@@ -55,7 +55,7 @@
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_claimed_by")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_assigned_to")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
 		    	<td><a href='statusUI.jsp/delete/<%out.println(resultSet.getString("complaint_id")); %>'>Delete</a></td>
 			</tr>

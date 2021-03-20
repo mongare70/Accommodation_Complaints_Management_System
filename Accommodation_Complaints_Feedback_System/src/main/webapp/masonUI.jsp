@@ -2,11 +2,9 @@
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
 	<br>
-	<button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/masonClaimedComplaints.jsp'">Click Here To Go To Complaints That <%=session.getAttribute("USER_FIRSTNAME")%> Has 'Claimed'</button>
-	<br>
 	<button type="button" class="btn btn-success btn-block" onClick="window.location.href='/masonDoneComplaints.jsp'">Click Here To Go To Complaints That <%=session.getAttribute("USER_FIRSTNAME")%> Has 'done'</button>
 	<br>
-	<h1 style="text-align: center;"> List of Unclaimed Complaints </h1>
+	<h1 style="text-align: center;"> List of <%=session.getAttribute("USER_FIRSTNAME")%>'s Complaints </h1>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -33,30 +31,32 @@
 			<table class="table table-bordered table-hover">
 
 			<tr>
-				<td>Complaint Title</td>
-				<td>Complaint Content</td>
-				<td>Complaint Author ID</td>
-				<td>Complaint Status</td>
 				<td>Complaint Category</td>
-				<td>Claim Complaint</td>
+				<td>Complaint Content</td>
+				<td>Complaint Author: (ID)</td>
+				<td>Complaint Status</td>
+				<td>Complaint Assigned By: (ID)</td>
+				<td>Complaint Assigned To: (ID)</td>
+				<td>Done Complaint?</td>
     		</tr>
 
 			<%
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userId, password);
 			statement=connection.createStatement();
-			String sql ="SELECT * FROM complaints WHERE complaint_status = 'approved' AND complaint_category = 'mason' AND complaint_claimed_by = 0 AND complaint_done_by = 0 ORDER BY complaint_id DESC";
+			String sql ="SELECT * FROM complaints WHERE complaint_status = 'assigned' AND complaint_category = 'mason' AND complaint_assigned_to = "+session.getAttribute("USER_ID")+" AND complaint_done_by = 0 ORDER BY complaint_id DESC";
 
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
 			%>
 			<tr>
-				<td><%out.println(resultSet.getString("complaint_title")); %></td>
+				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_category")); %></td>
-		    	<td><a href='masonUI.jsp/mason/claim/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Claim</a></td>
+		    	<td><%out.println(resultSet.getString("complaint_assigned_by")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_assigned_to")); %></td>
+		    	<td><a href='masonUI.jsp/mason/done/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Done</a></td>
 
 			</tr>
 

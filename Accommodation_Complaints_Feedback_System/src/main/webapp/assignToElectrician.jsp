@@ -22,7 +22,7 @@
                 	<label for="complaint_assigned_to">Assign To:</label><br>
                     <select name="complaint_assigned_to" id="complaint_assigned_to">
 			            <!-- Default -->
-			            <option value="">Select Plumber</option>
+			            <option value="">Select Electrician</option>
 			            
 			            <%
 							String driverName = "com.mysql.cj.jdbc.Driver";
@@ -43,7 +43,7 @@
 							try{
 								connection = DriverManager.getConnection(connectionUrl, userId, password);
 								statement=connection.createStatement();
-								String sql ="SELECT * FROM users WHERE user_role = 'plumber' ORDER BY user_id DESC";
+								String sql ="SELECT * FROM users WHERE user_role = 'electrician' ORDER BY user_id DESC";
 
 								resultSet = statement.executeQuery(sql);
 								while(resultSet.next()){
@@ -82,7 +82,7 @@
          
          if (complaint_assigned_to.value == "")                                  
          { 
-             window.alert("Please Assign a Plumber."); 
+             window.alert("Please Assign a Electrician."); 
              complaint_assigned_to.focus(); 
              return false; 
          } 
