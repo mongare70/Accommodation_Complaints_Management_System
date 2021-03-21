@@ -34,8 +34,11 @@
             Complaints
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          	<li><a class="dropdown-item" href="/admin/doneComplaints.jsp">Done Complaints</a></li>
+          	<li><a class="dropdown-item" href="/admin/pendingComplaints.jsp">Pending Complaints</a></li>
+          	<li><a class="dropdown-item" href="/admin/approvedComplaints.jsp">Approved Complaints</a></li>
           	<li><a class="dropdown-item" href="/admin/rejectedComplaints.jsp">Rejected Complaints</a></li>
+          	<li><a class="dropdown-item" href="/admin/assignedComplaints.jsp">Assigned Complaints</a></li>
+          	<li><a class="dropdown-item" href="/admin/doneComplaints.jsp">Done Complaints</a></li>
 	      	<li><a class="dropdown-item" href="/admin/complaints.jsp">All Complaints</a></li>
           </ul>
         </li>

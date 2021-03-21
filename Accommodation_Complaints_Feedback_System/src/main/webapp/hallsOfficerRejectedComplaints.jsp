@@ -34,6 +34,7 @@
 				<td>Complaint Author ID</td>
 				<td>Complaint Status</td>
 				<td>Complaint Rejected By (ID):</td>
+				<td>Created At:</td>
 				<td>Approve</td>
 				<td>Reject</td>
     		</tr>
@@ -53,6 +54,7 @@
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
+		    	<td><%out.println(resultSet.getString("created_at")); %></td>
 		    	<td><a href='hallsOfficerUI.jsp/approve/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Approve</a></td>
 		    	<td><a href='hallsOfficerUI.jsp/reject/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Reject</a></td>
 			</tr>

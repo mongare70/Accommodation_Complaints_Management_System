@@ -6,6 +6,7 @@
     <br>
     <button type="button" class="btn btn-success btn-block" onClick="window.location.href='/reports.jsp'">Click Here To Go To <%=session.getAttribute("USER_FIRSTNAME")%>'s Reports</button>
     <br>
+    <h1 style="text-align: center;"> List of Students</h1>
      		<%@page import="java.sql.DriverManager"%>
 			<%@page import="java.sql.ResultSet"%>
 			<%@page import="java.sql.Statement"%>
@@ -33,13 +34,12 @@
 
 			<tr>
 				<td>User ID</td>
-				<td>Staff Number/Registration Number </td>
+				<td>Registration Number</td>
 				<td>Firstname</td>
 				<td>Lastname</td>
 				<td>Username</td>
 				<td>Email</td>
 				<td>User Role</td>
-				<td>User Status</td>
 				<td>Report Student</td>
     		</tr>
 
@@ -61,7 +61,6 @@
 		    	<td><%out.println(resultSet.getString("username")); %></td>
 		    	<td><%out.println(resultSet.getString("user_email")); %></td>
 		    	<td><%out.println(resultSet.getString("user_role")); %></td>
-		    	<td><%out.println(resultSet.getString("user_status")); %></td>
 		    	<td><a href='users.jsp/report/<%out.println(resultSet.getString("user_id")); %>'>Report</a></td>
 			</tr>
 

@@ -1,5 +1,7 @@
 package com.demo.Accommodation_Complaints_Feedback_System.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -36,6 +39,9 @@ public class Complaint {
 	private int complaint_assigned_by = 0;
 	
 	private int complaint_done_by = 0;
+	
+	@CreatedDate
+	private Date createdAt;
 
 	
 	public int getComplaint_assigned_by() {

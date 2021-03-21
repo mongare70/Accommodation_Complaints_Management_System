@@ -31,10 +31,10 @@
 
 			<tr>
 				<td>Report ID</td>
-				<td>Report Author ID</td>
+				<td>Report Author: (ID)</td>
 				<td>Report Title</td>
 				<td>Report Content</td>
-				<td>Report Student ID</td>
+				<td>Reported Student: (ID)</td>
 				<td>Delete</td>
     		</tr>
 
