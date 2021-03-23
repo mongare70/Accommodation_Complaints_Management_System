@@ -43,7 +43,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link default" aria-current="page" href="/admin/reports.jsp">Reports</a>
+          <a class="nav-link default" aria-current="page" href="/admin/reports.jsp">Reported Students</a>
         </li>
       </ul>
     </div>
