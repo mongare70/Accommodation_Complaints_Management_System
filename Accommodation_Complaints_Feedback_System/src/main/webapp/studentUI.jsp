@@ -24,7 +24,7 @@
 					<!-- Default -->
 					<option value="None">Select Options</option>
 
-					<option value="undefined">None</option>
+					<option value="others">Others</option>
 					<option value="mason">Masonry</option>
 					<option value="plumber">Plumbing</option>
 					<option value="carpenter">Carpentry</option>

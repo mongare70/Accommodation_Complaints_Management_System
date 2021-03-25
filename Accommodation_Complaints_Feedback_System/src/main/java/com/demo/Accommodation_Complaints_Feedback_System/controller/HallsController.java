@@ -34,12 +34,12 @@ public class HallsController {
 
 	@Autowired
 	private ReportService reportService;
-	
+
 	@RequestMapping("/")
 	public String getUser() {
 		return "login.jsp";
 	}
-	
+
 	@GetMapping("/admin/report")
 	public String generateReport() throws JRException, IOException {
 		return reportService.exportReport();
@@ -95,6 +95,52 @@ public class HallsController {
 		}
 
 		return "redirect:/admin/register_user.jsp";
+	}
+
+	// Update User Details
+	@PostMapping("/update_user")
+	public String updateUser(@RequestParam String user_firstname, @RequestParam String user_lastname,
+			@RequestParam String username, @RequestParam String user_email, @RequestParam String user_hostel,
+			@RequestParam String user_block, @RequestParam String user_room_number, @RequestParam String password,
+			@RequestParam int user_id) {
+		User user = service.getUser(user_id);
+		if (user_hostel == "" && user_block == "" && user_room_number == "") {
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel("");
+			user.setUser_block("");
+			user.setUser_room_number(0);
+			user.setPassword(password);
+
+			service.saveUser(user);
+
+		} else if (user_room_number == "") {
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setUser_room_number(0);
+			user.setPassword(password);
+
+			service.saveUser(user);
+		} else {
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setUser_room_number(Integer.parseInt(user_room_number));
+			user.setPassword(password);
+
+			service.saveUser(user);
+		}
+
+		return "redirect:/profile.jsp";
 	}
 
 	// delete user
