@@ -53,7 +53,7 @@
 	  </a>
 	
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	    <li><a class="dropdown-item" href="/profile.jsp">Profile</a></li>
+	    <li><a class="dropdown-item" href="/admin/profile.jsp">Profile</a></li>
 	    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
 	  </ul>
 	</div>

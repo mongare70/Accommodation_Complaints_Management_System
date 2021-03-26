@@ -47,49 +47,50 @@ public class HallsController {
 
 	// register new user
 	@PostMapping("/register_user")
-	public String addUser(@RequestParam String user_number, @RequestParam String user_firstname,
-			@RequestParam String user_lastname, @RequestParam String username, @RequestParam String user_email,
-			@RequestParam String user_role, @RequestParam String user_hostel, @RequestParam String user_block,
-			@RequestParam String user_room_number, @RequestParam String password) {
+	public String addUser(@RequestParam String reg_no, @RequestParam String staff_no,
+			@RequestParam String user_firstname, @RequestParam String user_lastname, @RequestParam String username,
+			@RequestParam String user_email, @RequestParam String user_role, @RequestParam String user_hostel,
+			@RequestParam String user_block, @RequestParam String user_room_number) {
+
 		User user = new User();
-		if (user_hostel == "" && user_block == "" && user_room_number == "") {
-			user.setUser_number(user_number);
+
+		if (user_role.equals("student")) {
+			user.setUser_role(user_role);
+			user.setUser_number(reg_no);
 			user.setUser_firstname(user_firstname);
 			user.setUser_lastname(user_lastname);
 			user.setUsername(username);
 			user.setUser_email(user_email);
-			user.setUser_role(user_role);
-			user.setUser_hostel("");
-			user.setUser_block("");
-			user.setUser_room_number(0);
-			user.setPassword(password);
-
-			service.saveUser(user);
-
-		} else if (user_room_number == "") {
-			user.setUser_number(user_number);
-			user.setUser_firstname(user_firstname);
-			user.setUser_lastname(user_lastname);
-			user.setUsername(username);
-			user.setUser_email(user_email);
-			user.setUser_role(user_role);
-			user.setUser_hostel(user_hostel);
-			user.setUser_block(user_block);
-			user.setUser_room_number(0);
-			user.setPassword(password);
-
-			service.saveUser(user);
-		} else {
-			user.setUser_number(user_number);
-			user.setUser_firstname(user_firstname);
-			user.setUser_lastname(user_lastname);
-			user.setUsername(username);
-			user.setUser_email(user_email);
-			user.setUser_role(user_role);
 			user.setUser_hostel(user_hostel);
 			user.setUser_block(user_block);
 			user.setUser_room_number(Integer.parseInt(user_room_number));
-			user.setPassword(password);
+			user.setPassword(reg_no);
+
+			service.saveUser(user);
+		} else if (user_role.equals("custodian")) {
+			user.setUser_role(user_role);
+			user.setUser_number(staff_no);
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setUser_room_number(0);
+			user.setPassword(staff_no);
+
+			service.saveUser(user);
+		} else {
+			user.setUser_role(user_role);
+			user.setUser_number(staff_no);
+			user.setUser_firstname(user_firstname);
+			user.setUser_lastname(user_lastname);
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel("");
+			user.setUser_block("");
+			user.setUser_room_number(0);
+			user.setPassword(staff_no);
 
 			service.saveUser(user);
 		}
@@ -99,42 +100,32 @@ public class HallsController {
 
 	// Update User Details
 	@PostMapping("/update_user")
-	public String updateUser(@RequestParam String user_firstname, @RequestParam String user_lastname,
-			@RequestParam String username, @RequestParam String user_email, @RequestParam String user_hostel,
-			@RequestParam String user_block, @RequestParam String user_room_number, @RequestParam String password,
-			@RequestParam int user_id) {
+	public String updateUser(@RequestParam String user_role, @RequestParam String username,
+			@RequestParam String user_email, @RequestParam String user_hostel, @RequestParam String user_block,
+			@RequestParam String user_room_number, @RequestParam String password, @RequestParam int user_id) {
+		
 		User user = service.getUser(user_id);
-		if (user_hostel == "" && user_block == "" && user_room_number == "") {
-			user.setUser_firstname(user_firstname);
-			user.setUser_lastname(user_lastname);
-			user.setUsername(username);
-			user.setUser_email(user_email);
-			user.setUser_hostel("");
-			user.setUser_block("");
-			user.setUser_room_number(0);
-			user.setPassword(password);
 
-			service.saveUser(user);
-
-		} else if (user_room_number == "") {
-			user.setUser_firstname(user_firstname);
-			user.setUser_lastname(user_lastname);
-			user.setUsername(username);
-			user.setUser_email(user_email);
-			user.setUser_hostel(user_hostel);
-			user.setUser_block(user_block);
-			user.setUser_room_number(0);
-			user.setPassword(password);
-
-			service.saveUser(user);
-		} else {
-			user.setUser_firstname(user_firstname);
-			user.setUser_lastname(user_lastname);
+		if (user_role.equals("student")) {
 			user.setUsername(username);
 			user.setUser_email(user_email);
 			user.setUser_hostel(user_hostel);
 			user.setUser_block(user_block);
 			user.setUser_room_number(Integer.parseInt(user_room_number));
+			user.setPassword(password);
+
+			service.saveUser(user);
+		} else if (user_role.equals("custodian")) {
+			user.setUsername(username);
+			user.setUser_email(user_email);
+			user.setUser_hostel(user_hostel);
+			user.setUser_block(user_block);
+			user.setPassword(password);
+
+			service.saveUser(user);
+		} else {
+			user.setUsername(username);
+			user.setUser_email(user_email);
 			user.setPassword(password);
 
 			service.saveUser(user);
@@ -184,7 +175,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/admin/adminUI.jsp";
+				if (password.equals(admin.getUser_number())) {
+					return "redirect:/admin/profile.jsp";
+				} else {
+					return "redirect:/admin/adminUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -217,7 +212,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/studentUI.jsp";
+				if (password.equals(student.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/studentUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -250,7 +249,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/hallsOfficerUI.jsp";
+				if (password.equals(halls_officer.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/hallsOfficerUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -283,7 +286,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/custodianUI.jsp";
+				if (password.equals(custodian.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/custodianUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -316,7 +323,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/plumberUI.jsp";
+				if (password.equals(plumber.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/plumberUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -349,7 +360,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/masonUI.jsp";
+				if (password.equals(mason.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/masonUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -382,7 +397,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/carpenterUI.jsp";
+				if (password.equals(carpenter.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/carpenterUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -415,7 +434,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/securityUI.jsp";
+				if (password.equals(security.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/securityUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -448,7 +471,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/electricianUI.jsp";
+				if (password.equals(electrician.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/electricianUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -481,7 +508,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/cleanerUI.jsp";
+				if (password.equals(cleaner.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/cleanerUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -514,7 +545,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/healthUI.jsp";
+				if (password.equals(health.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/healthUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
@@ -547,7 +582,11 @@ public class HallsController {
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
 
-				return "redirect:/painterUI.jsp";
+				if (password.equals(painter.getUser_number())) {
+					return "redirect:/profile.jsp";
+				} else {
+					return "redirect:/painterUI.jsp";
+				}
 
 			} else {
 				return "redirect:/login.jsp";
