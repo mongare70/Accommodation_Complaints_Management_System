@@ -89,7 +89,7 @@
                     <input type="number" class="form-control" id="user_room_number" name="user_room_number" placeholder="Room Number">
                 </div>
                 <h2>Notice!</h2>
-                <p>The system will autogenerate a password that is same as the user Registration Number or Staff Number.</p>
+                <p>The system will autogenerate a password that is similar to the user's Registration Number or Staff Number.</p>
                   <button type="submit" class="btn btn-success btn-block">Submit</button>
                 <br>
                 <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/admin/adminUI.jsp'">Cancel</button>

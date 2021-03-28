@@ -31,13 +31,13 @@
 			ResultSet resultSet = null;
 			%>
 			
-			<h1 style="text-align: center;"> List of Complaints</h1>
+			<h1 style="text-align: center;"> List of Approved Complaints</h1>
 			<table class="table table-bordered table-hover">
 
 			<tr>
 				<td>Complaint Category</td>
 				<td>Complaint Content</td>
-				<td>Complaint Author ID</td>
+				<td>Complaint Author: (ID)</td>
 				<td>Complaint Status</td>
 				<td>Complaint Approved By: (ID)</td>
 				<td>Assign to:</td>
@@ -55,25 +55,28 @@
 			<tr>
 				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
+		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
-		    	<td><div class="dropdown">
-					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-					    Assign To:
-					  </a>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <li><a href='custodianUI.jsp/mason/<%out.println(resultSet.getString("complaint_id")); %>'>Mason</a></li>
-					    <li><a href='custodianUI.jsp/plumber/<%out.println(resultSet.getString("complaint_id")); %>'>Plumber</a></li>
-					    <li><a href='custodianUI.jsp/carpenter/<%out.println(resultSet.getString("complaint_id")); %>'>Carpenter</a></li>
-					    <li><a href='custodianUI.jsp/security/<%out.println(resultSet.getString("complaint_id")); %>'>Security</a></li>
-					    <li><a href='custodianUI.jsp/electrician/<%out.println(resultSet.getString("complaint_id")); %>'>Electrician</a></li>
-					    <li><a href='custodianUI.jsp/health/<%out.println(resultSet.getString("complaint_id")); %>'>Health</a></li>
-					    <li><a href='custodianUI.jsp/painter/<%out.println(resultSet.getString("complaint_id")); %>'>Painter</a></li>
-					    <li><a href='custodianUI.jsp/cleaner/<%out.println(resultSet.getString("complaint_id")); %>'>Cleaner</a></li>
-					    <li><a href='custodianUI.jsp/custodian/<%out.println(resultSet.getString("complaint_id")); %>'>Custodian</a></li>
-					  </ul>
-					</div></td>
+		    	<td><a href='user/<%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %>'><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></a></td>
+		    	<%if(resultSet.getString("complaint_category").equals("plumber")){ %>
+		    	<td>><a href='custodianUI.jsp/plumber/<%out.println(resultSet.getString("complaint_id")); %>'>Plumber</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("mason")){ %>
+		    	<td><a href='custodianUI.jsp/mason/<%out.println(resultSet.getString("complaint_id")); %>'>Mason</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("carpenter")){ %>
+		    	<td><a href='custodianUI.jsp/carpenter/<%out.println(resultSet.getString("complaint_id")); %>'>Carpenter</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("security")){ %>
+		    	<td><a href='custodianUI.jsp/security/<%out.println(resultSet.getString("complaint_id")); %>'>Security</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("electrician")){ %>
+		    	<td><a href='custodianUI.jsp/electrician/<%out.println(resultSet.getString("complaint_id")); %>'>Electrician</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("health")){ %>
+		    	<td><a href='custodianUI.jsp/health/<%out.println(resultSet.getString("complaint_id")); %>'>Health</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("painter")){ %>
+		    	<td><a href='custodianUI.jsp/painter/<%out.println(resultSet.getString("complaint_id")); %>'>Painter</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("cleaner")){ %>
+		    	<td><a href='custodianUI.jsp/cleaner/<%out.println(resultSet.getString("complaint_id")); %>'>Cleaner</a></td>
+		    	<% } else if(resultSet.getString("complaint_category").equals("custodian") || resultSet.getString("complaint_category").equals("others") ){ %>
+		    	<td><a href='custodianUI.jsp/custodian/<%out.println(resultSet.getString("complaint_id")); %>'>Custodian</a></td>
+		    	<% } %>
 			</tr>
 
 			<%

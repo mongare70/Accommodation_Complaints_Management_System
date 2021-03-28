@@ -1061,5 +1061,12 @@ public class HallsController {
 		return "redirect:/admin/reports.jsp";
 
 	}
+	
+	//Show Student
+	@RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
+	public String showUser(@PathVariable("userId") int userId, Map<String, Object> map, Model model) {
+		model.addAttribute("userId", userId);
+		return "/showUser.jsp";
 
+	}
 }

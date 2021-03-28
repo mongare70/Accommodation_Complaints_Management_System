@@ -51,7 +51,7 @@
 			<tr>
 				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
+		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></td>
 		    	<td><%out.println(resultSet.getString("created_at")); %></td>

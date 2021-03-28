@@ -51,9 +51,9 @@
 			<tr>
 				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
+		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
-		    	<td><%out.println(resultSet.getString("complaint_assigned_by")); %></td>
+		    	<td><a href='user/<%out.println(resultSet.getString("complaint_assigned_by")); %>'><%out.println(resultSet.getString("complaint_assigned_by")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_assigned_to")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_done_by")); %></td>
 		    	<td><a href='carpenterDoneComplaints.jsp/carpenter/undo/<%out.println(resultSet.getString("complaint_id")); %>'>Undo</a></td>
