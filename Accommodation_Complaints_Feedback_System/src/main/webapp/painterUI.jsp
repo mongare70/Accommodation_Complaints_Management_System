@@ -35,6 +35,9 @@
 				<td>Complaint Content</td>
 				<td>Complaint Author: (ID)</td>
 				<td>Complaint Status</td>
+				<td>Hostel</td>
+				<td>Block</td>
+				<td>Room Number</td>
 				<td>Complaint Assigned By: (ID)</td>
 				<td>Complaint Assigned To: (ID)</td>
 				<td>Done Complaint?</td>
@@ -54,6 +57,9 @@
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_hostel")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_block")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_room_number")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_assigned_by")); %>'><%out.println(resultSet.getString("complaint_assigned_by")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_assigned_to")); %></td>
 		    	<td><a href='painterUI.jsp/painter/done/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>'>Done</a></td>

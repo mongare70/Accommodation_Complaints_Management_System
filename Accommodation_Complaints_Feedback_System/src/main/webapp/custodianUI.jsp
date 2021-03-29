@@ -37,8 +37,12 @@
 			<tr>
 				<td>Complaint Category</td>
 				<td>Complaint Content</td>
+				<td>Complaint Hostel</td>
 				<td>Complaint Author: (ID)</td>
 				<td>Complaint Status</td>
+				<td>Hostel</td>
+				<td>Block</td>
+				<td>Room Number</td>
 				<td>Complaint Approved By: (ID)</td>
 				<td>Assign to:</td>
     		</tr>
@@ -55,11 +59,15 @@
 			<tr>
 				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_hostel")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_hostel")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_block")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_room_number")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %>'><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></a></td>
 		    	<%if(resultSet.getString("complaint_category").equals("plumber")){ %>
-		    	<td>><a href='custodianUI.jsp/plumber/<%out.println(resultSet.getString("complaint_id")); %>'>Plumber</a></td>
+		    	<td><a href='custodianUI.jsp/plumber/<%out.println(resultSet.getString("complaint_id")); %>'>Plumber</a></td>
 		    	<% } else if(resultSet.getString("complaint_category").equals("mason")){ %>
 		    	<td><a href='custodianUI.jsp/mason/<%out.println(resultSet.getString("complaint_id")); %>'>Mason</a></td>
 		    	<% } else if(resultSet.getString("complaint_category").equals("carpenter")){ %>

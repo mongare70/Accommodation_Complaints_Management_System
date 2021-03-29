@@ -36,6 +36,9 @@
 				<td>Complaint Content</td>
 				<td>Complaint Author: (ID)</td>
 				<td>Complaint Status</td>
+				<td>Hostel</td>
+				<td>Block</td>
+				<td>Room Number</td>
 				<td>Created At:</td>
 				<td>Approve</td>
 				<td>Reject</td>
@@ -55,6 +58,9 @@
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_author_id")); %>'><%out.println(resultSet.getString("complaint_author_id")); %></a></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_hostel")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_block")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_room_number")); %></td>
 		    	<td><%out.println(resultSet.getString("created_at")); %></td>
 		    	<td><a href='hallsOfficerUI.jsp/approve/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Approve</a></td>
 		    	<td><a href='hallsOfficerUI.jsp/reject/<%out.println(resultSet.getString("complaint_id")); %>/<%=session.getAttribute("USER_ID")%>/'>Reject</a></td>

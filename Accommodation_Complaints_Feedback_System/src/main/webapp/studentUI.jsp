@@ -47,7 +47,50 @@
 			<input type="hidden" id="complaint_author_id"
 				name="complaint_author_id"
 				value="<%=session.getAttribute("USER_ID")%>">
+				
+			<%@page import="java.sql.DriverManager"%>
+			<%@page import="java.sql.ResultSet"%>
+			<%@page import="java.sql.Statement"%>
+			<%@page import="java.sql.Connection"%>
 
+			<%
+
+			String driverName = "com.mysql.cj.jdbc.Driver";
+			String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_feedback_system";
+			String userId = "root";
+			String password = "";
+
+			try {
+			Class.forName(driverName);
+			}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			}
+
+			Connection connection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+			
+			try{
+				connection = DriverManager.getConnection(connectionUrl, userId, password);
+				statement=connection.createStatement();
+				String sql ="SELECT * FROM users WHERE user_id = "+session.getAttribute("USER_ID");
+
+				resultSet = statement.executeQuery(sql);
+				while(resultSet.next()){
+			%>
+				
+			<input type="hidden" id="complaint_hostel" name="complaint_hostel" value="<%out.println(resultSet.getString("user_hostel")); %>">
+			<input type="hidden" id="complaint_block" name="complaint_block" value="<%out.println(resultSet.getString("user_block")); %>">
+			<input type="hidden" id="complaint_room_number" name="complaint_room_number" value="<%out.println(resultSet.getInt("user_room_number")); %>">
+			
+			<%
+		    }
+
+		    } catch (Exception e) {
+		    e.printStackTrace();
+		    }
+			%>
+			
 			<button type="submit" class="btn btn-success btn-block">Submit</button>
 		</form>
 		<!-- Form End-->

@@ -269,22 +269,29 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user_hostel = (ArrayList<Object>) request.getSession()
+						.getAttribute("USER_HOSTEL");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user_hostel == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user_hostel = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_HOSTEL", user_hostel);
 
 				}
 
 				user_id.add(custodian.getUser_id());
 				user_firstname.add(custodian.getUser_firstname());
+				user_hostel.add(custodian.getUser_hostel());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_HOSTEL", user_hostel.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(custodian.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -606,12 +613,15 @@ public class HallsController {
 
 	@PostMapping("/submitComplaint")
 	public String submitComplaint(@RequestParam String complaint_category, @RequestParam String complaint_content,
-			@RequestParam int complaint_author_id) {
+			@RequestParam int complaint_author_id, @RequestParam String complaint_hostel, @RequestParam String complaint_block, @RequestParam int complaint_room_number) {
 
 		Complaint complaint = new Complaint();
 		complaint.setComplaint_category(complaint_category);
 		complaint.setComplaint_content(complaint_content);
 		complaint.setComplaint_author_id(complaint_author_id);
+		complaint.setComplaint_hostel(complaint_hostel);
+		complaint.setComplaint_block(complaint_block);
+		complaint.setComplaint_room_number(complaint_room_number);
 
 		service.saveComplaint(complaint);
 		return "redirect:/studentUI.jsp";

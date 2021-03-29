@@ -32,6 +32,9 @@
 				<td>Complaint Category</td>
 				<td>Complaint Content</td>
 				<td>Complaint Author: (ID)</td>
+				<td>Hostel</td>
+				<td>Block</td>
+				<td>Room Number</td>
 				<td>Complaint Status</td>
 				<td>Complaint Approved/Rejected By: (ID)</td>
 				<td>Complaint Assigned To: (ID)</td>
@@ -54,6 +57,9 @@
 				<td><%out.println(resultSet.getString("complaint_category")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_content")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_author_id")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_hostel")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_block")); %></td>
+		    	<td><%out.println(resultSet.getString("complaint_room_number")); %></td>
 		    	<td><%out.println(resultSet.getString("complaint_status")); %></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %>'><%out.println(resultSet.getString("complaint_approved_or_rejected_by")); %></a></td>
 		    	<td><a href='user/<%out.println(resultSet.getString("complaint_assigned_to")); %>'><%out.println(resultSet.getString("complaint_assigned_to")); %></a></td>

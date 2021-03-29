@@ -30,6 +30,14 @@ public class Complaint {
 	@NotBlank
 	private String complaint_status = "pending";
 	
+	@NotBlank
+	private String complaint_hostel;
+	
+	@NotBlank
+	private String complaint_block;
+	
+	private int complaint_room_number;
+	
 	private int complaint_approved_or_rejected_by = 0;
 	
 	private int complaint_author_id;
@@ -44,6 +52,30 @@ public class Complaint {
 	private Date createdAt;
 
 	
+	public String getComplaint_block() {
+		return complaint_block;
+	}
+
+	public void setComplaint_block(String complaint_block) {
+		this.complaint_block = complaint_block;
+	}
+
+	public int getComplaint_room_number() {
+		return complaint_room_number;
+	}
+
+	public void setComplaint_room_number(int complaint_room_number) {
+		this.complaint_room_number = complaint_room_number;
+	}
+
+	public String getComplaint_hostel() {
+		return complaint_hostel;
+	}
+
+	public void setComplaint_hostel(String complaint_hostel) {
+		this.complaint_hostel = complaint_hostel;
+	}
+
 	public int getComplaint_assigned_by() {
 		return complaint_assigned_by;
 	}
@@ -120,9 +152,11 @@ public class Complaint {
 	public String toString() {
 		return "Complaint [complaint_id=" + complaint_id + ", complaint_category=" + complaint_category
 				+ ", complaint_content=" + complaint_content + ", complaint_status=" + complaint_status
-				+ ", complaint_approved_or_rejected_by=" + complaint_approved_or_rejected_by + ", complaint_author_id="
-				+ complaint_author_id + ", complaint_assigned_to=" + complaint_assigned_to + ", complaint_assigned_by="
-				+ complaint_assigned_by + ", complaint_done_by=" + complaint_done_by + "]";
+				+ ", complaint_hostel=" + complaint_hostel + ", complaint_block=" + complaint_block
+				+ ", complaint_room_number=" + complaint_room_number + ", complaint_approved_or_rejected_by="
+				+ complaint_approved_or_rejected_by + ", complaint_author_id=" + complaint_author_id
+				+ ", complaint_assigned_to=" + complaint_assigned_to + ", complaint_assigned_by="
+				+ complaint_assigned_by + ", complaint_done_by=" + complaint_done_by + ", createdAt=" + createdAt + "]";
 	}
 	
 }
