@@ -1,5 +1,6 @@
 <%@ include file="/includes/header.jsp" %>
-<%@ include file="/includes/navigation.jsp" %> 
+<%@ include file="/includes/navigation.jsp" %>
+<% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("halls_officer")){ %> 
 <div class="container-fluid bg">
 
 	<button type="button" class="btn btn-dark btn-block" onClick="window.location.href='/hallsOfficerApprovedComplaints.jsp'">Complaints that <%=session.getAttribute("USER_FIRSTNAME")%> has 'approved'</button>
@@ -75,4 +76,7 @@
 			%>
 			</table>
 </div>
+<% } else { %>
+<h1>You need to login as Halls Officer first to access this page</h1>
+<% } %>
 <%@ include file="/includes/footer.jsp" %>

@@ -1,5 +1,6 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
+<% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("carpenter")){ %> 
 <div class="container-fluid bg">
 	<br>
 	<button type="button" class="btn btn-success btn-block" onClick="window.location.href='/carpenterDoneComplaints.jsp'">Click Here To Go To Complaints That <%=session.getAttribute("USER_FIRSTNAME")%> Has 'done'</button>
@@ -75,4 +76,7 @@
 			%>
 			</table>
 </div>
+<% } else { %>
+<h1>You need to login as Carpenter first to access this page</h1>
+<% } %>
 <%@ include file="/includes/footer.jsp" %>

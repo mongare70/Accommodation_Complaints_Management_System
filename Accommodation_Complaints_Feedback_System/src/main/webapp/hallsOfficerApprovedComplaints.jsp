@@ -1,6 +1,7 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %> 
 <div class="container-fluid bg">
+<% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("halls_officer")){ %>
 <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='hallsOfficerUI.jsp'">Back</button>
  
      		<%@page import="java.sql.DriverManager"%>
@@ -83,4 +84,7 @@
 			%>
 			</table>
 </div>
+<% } else { %>
+<h1>You need to login as Halls Officer first to access this page</h1>
+<% } %>
 <%@ include file="/includes/footer.jsp" %>

@@ -1,6 +1,8 @@
 <%@ include file="/includes/header.jsp" %>
 <%@ include file="/includes/navigation.jsp" %>
 
+<% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("custodian")){ %> 
+
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -90,3 +92,7 @@
          return true; 
      }	
 	</script>
+		<% } else { %>
+<h1>You need to login as Custodian first to access this page</h1>
+<% } %>
+<%@ include file="/includes/footer.jsp" %>

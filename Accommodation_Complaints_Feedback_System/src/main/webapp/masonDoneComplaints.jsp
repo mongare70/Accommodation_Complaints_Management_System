@@ -1,5 +1,6 @@
 <%@ include file="/includes/header.jsp" %>
-<%@ include file="/includes/navigation.jsp" %> 
+<%@ include file="/includes/navigation.jsp" %>
+<% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("mason")){ %>  
 <div class="container-fluid bg">
 <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='masonUI.jsp'">Back</button>
      		<%@page import="java.sql.DriverManager"%>
@@ -75,4 +76,7 @@
 			%>
 			</table>
 </div>
+<% } else { %>
+<h1>You need to login as Mason first to access this page</h1>
+<% } %>
 <%@ include file="/includes/footer.jsp" %>

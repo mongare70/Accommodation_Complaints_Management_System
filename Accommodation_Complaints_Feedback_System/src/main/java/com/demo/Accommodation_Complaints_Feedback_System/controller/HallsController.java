@@ -103,7 +103,7 @@ public class HallsController {
 	public String updateUser(@RequestParam String user_role, @RequestParam String username,
 			@RequestParam String user_email, @RequestParam String user_hostel, @RequestParam String user_block,
 			@RequestParam String user_room_number, @RequestParam String password, @RequestParam int user_id) {
-		
+
 		User user = service.getUser(user_id);
 
 		if (user_role.equals("student")) {
@@ -158,22 +158,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(admin.getUser_id());
 				user_firstname.add(admin.getUser_firstname());
+				user__role.add(admin.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(admin.getUser_number())) {
 					return "redirect:/admin/profile.jsp";
@@ -195,22 +201,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(student.getUser_id());
 				user_firstname.add(student.getUser_firstname());
+				user__role.add(student.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(student.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -232,22 +244,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(halls_officer.getUser_id());
 				user_firstname.add(halls_officer.getUser_firstname());
+				user__role.add(halls_officer.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(halls_officer.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -270,28 +288,34 @@ public class HallsController {
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
 				@SuppressWarnings("unchecked")
-				ArrayList<Object> user_hostel = (ArrayList<Object>) request.getSession()
-						.getAttribute("USER_HOSTEL");
+				ArrayList<Object> user_hostel = (ArrayList<Object>) request.getSession().getAttribute("USER_HOSTEL");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null || user_hostel == null) {
+				if (user_id == null || user_firstname == null || user_hostel == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
 					user_hostel = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
 					request.getSession().setAttribute("USER_HOSTEL", user_hostel);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(custodian.getUser_id());
 				user_firstname.add(custodian.getUser_firstname());
 				user_hostel.add(custodian.getUser_hostel());
+				user__role.add(custodian.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
-				request.getSession().setAttribute("USER_HOSTEL", user_hostel.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_HOSTEL",
+						user_hostel.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(custodian.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -313,22 +337,27 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
-
+					request.getSession().setAttribute("USER_ROLE", user__role);
 				}
 
 				user_id.add(plumber.getUser_id());
 				user_firstname.add(plumber.getUser_firstname());
+				user__role.add(plumber.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(plumber.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -350,22 +379,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(mason.getUser_id());
 				user_firstname.add(mason.getUser_firstname());
+				user__role.add(mason.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(mason.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -387,22 +422,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(carpenter.getUser_id());
 				user_firstname.add(carpenter.getUser_firstname());
+				user__role.add(carpenter.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(carpenter.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -424,22 +465,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(security.getUser_id());
 				user_firstname.add(security.getUser_firstname());
+				user__role.add(security.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(security.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -461,22 +508,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(electrician.getUser_id());
 				user_firstname.add(electrician.getUser_firstname());
+				user__role.add(electrician.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(electrician.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -498,22 +551,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(cleaner.getUser_id());
 				user_firstname.add(cleaner.getUser_firstname());
+				user__role.add(cleaner.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(cleaner.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -535,22 +594,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(health.getUser_id());
 				user_firstname.add(health.getUser_firstname());
+				user__role.add(health.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(health.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -572,22 +637,28 @@ public class HallsController {
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> user_firstname = (ArrayList<Object>) request.getSession()
 						.getAttribute("USER_FIRSTNAME");
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> user__role = (ArrayList<Object>) request.getSession().getAttribute("USER_ROLE");
 
-				if (user_id == null || user_firstname == null) {
+				if (user_id == null || user_firstname == null || user__role == null) {
 					user_id = new ArrayList<>();
 					user_firstname = new ArrayList<>();
+					user__role = new ArrayList<>();
 
 					request.getSession().setAttribute("USER_ID", user_id);
 					request.getSession().setAttribute("USER_FIRSTNAME", user_firstname);
+					request.getSession().setAttribute("USER_ROLE", user__role);
 
 				}
 
 				user_id.add(painter.getUser_id());
 				user_firstname.add(painter.getUser_firstname());
+				user__role.add(painter.getUser_role());
 
 				request.getSession().setAttribute("USER_ID", user_id.toString().replace("[", "").replace("]", ""));
 				request.getSession().setAttribute("USER_FIRSTNAME",
 						user_firstname.toString().replace("[", "").replace("]", ""));
+				request.getSession().setAttribute("USER_ROLE", user__role.toString().replace("[", "").replace("]", ""));
 
 				if (password.equals(painter.getUser_number())) {
 					return "redirect:/profile.jsp";
@@ -613,7 +684,8 @@ public class HallsController {
 
 	@PostMapping("/submitComplaint")
 	public String submitComplaint(@RequestParam String complaint_category, @RequestParam String complaint_content,
-			@RequestParam int complaint_author_id, @RequestParam String complaint_hostel, @RequestParam String complaint_block, @RequestParam int complaint_room_number) {
+			@RequestParam int complaint_author_id, @RequestParam String complaint_hostel,
+			@RequestParam String complaint_block, @RequestParam int complaint_room_number) {
 
 		Complaint complaint = new Complaint();
 		complaint.setComplaint_category(complaint_category);
@@ -1071,8 +1143,8 @@ public class HallsController {
 		return "redirect:/admin/reports.jsp";
 
 	}
-	
-	//Show Student
+
+	// Show User
 	@RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
 	public String showUser(@PathVariable("userId") int userId, Map<String, Object> map, Model model) {
 		model.addAttribute("userId", userId);
