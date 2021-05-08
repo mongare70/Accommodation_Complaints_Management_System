@@ -1,4 +1,4 @@
-package com.demo.Accommodation_Complaints_Feedback_System.controller;
+package com.demo.Accommodation_Complaints_Management_System.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,14 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.demo.Accommodation_Complaints_Feedback_System.dao.ServiceHalls;
-import com.demo.Accommodation_Complaints_Feedback_System.model.User;
-import com.demo.Accommodation_Complaints_Feedback_System.reports.ReportService;
+import com.demo.Accommodation_Complaints_Management_System.dao.ServiceHalls;
+import com.demo.Accommodation_Complaints_Management_System.model.Complaint;
+import com.demo.Accommodation_Complaints_Management_System.model.Report;
+import com.demo.Accommodation_Complaints_Management_System.model.User;
+import com.demo.Accommodation_Complaints_Management_System.reports.ReportService;
 
 import net.sf.jasperreports.engine.JRException;
-
-import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Report;
 
 @Controller
 public class HallsController {

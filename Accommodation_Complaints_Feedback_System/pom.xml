@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.demo</groupId>
-	<artifactId>Accommodation_Complaints_Feedback_System</artifactId>
+	<artifactId>Accommodation_Complaints_Management_System</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Accommodation_Complaints_Feedback_System</name>
+	<name>Accommodation_Complaints_Management_System</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

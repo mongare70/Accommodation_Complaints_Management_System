@@ -1,4 +1,4 @@
-package com.demo.Accommodation_Complaints_Feedback_System.reports;
+package com.demo.Accommodation_Complaints_Management_System.reports;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
-import com.demo.Accommodation_Complaints_Feedback_System.repository.ComplaintRepository;
+import com.demo.Accommodation_Complaints_Management_System.model.Complaint;
+import com.demo.Accommodation_Complaints_Management_System.repository.ComplaintRepository;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;

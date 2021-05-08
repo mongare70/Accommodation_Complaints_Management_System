@@ -2,11 +2,13 @@
 <%@ include file="/includes/navigation.jsp"%>
 
 <div class="container">
+	<h1 style="text-align: center;">Accommodation Complaints
+		Management System</h1>
 	<!-- Form Start -->
+	<br>
 	<form class="form-container" method="post" action="/login"
 		name="login_form" id="login_form" onsubmit="return validateForm()">
-		<h1 style="text-align: center;">Accommodation Complaints
-			Management System</h1>
+
 		<div class="form-group">
 			<label for="category">User Role:</label> <select class="form-control"
 				id="user_role" name="user_role">

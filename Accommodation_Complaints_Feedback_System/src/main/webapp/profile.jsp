@@ -13,7 +13,7 @@
                 <h1>User Profile</h1>
                 <%
 					String driverName = "com.mysql.cj.jdbc.Driver";
-					String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_feedback_system";
+					String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_management_system";
 					String userId = "root";
 					String password = "";
 					

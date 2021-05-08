@@ -1,4 +1,4 @@
-package com.demo.Accommodation_Complaints_Feedback_System.model;
+package com.demo.Accommodation_Complaints_Management_System.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;

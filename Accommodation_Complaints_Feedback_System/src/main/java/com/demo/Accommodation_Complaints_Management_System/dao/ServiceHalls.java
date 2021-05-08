@@ -1,14 +1,15 @@
-package com.demo.Accommodation_Complaints_Feedback_System.dao;
+package com.demo.Accommodation_Complaints_Management_System.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.demo.Accommodation_Complaints_Feedback_System.repository.UserRepository;
+
+import com.demo.Accommodation_Complaints_Management_System.model.Complaint;
+import com.demo.Accommodation_Complaints_Management_System.model.Report;
+import com.demo.Accommodation_Complaints_Management_System.model.User;
+import com.demo.Accommodation_Complaints_Management_System.repository.ComplaintRepository;
+import com.demo.Accommodation_Complaints_Management_System.repository.ReportRepository;
+import com.demo.Accommodation_Complaints_Management_System.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Complaint;
-import com.demo.Accommodation_Complaints_Feedback_System.model.Report;
-import com.demo.Accommodation_Complaints_Feedback_System.repository.ComplaintRepository;
-import com.demo.Accommodation_Complaints_Feedback_System.repository.ReportRepository;
-import com.demo.Accommodation_Complaints_Feedback_System.model.User;
 
 
 @Service
