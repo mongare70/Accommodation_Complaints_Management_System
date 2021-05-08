@@ -47,29 +47,11 @@
 
 			<input type="hidden" id="complaint_author_id"
 				name="complaint_author_id"
-				value="<%=session.getAttribute("USER_ID")%>">
-				
-			<%@page import="java.sql.DriverManager"%>
-			<%@page import="java.sql.ResultSet"%>
-			<%@page import="java.sql.Statement"%>
-			<%@page import="java.sql.Connection"%>
+				value="<%=session.getAttribute("USER_ID")%>">	
+			
+			<%@ include file="/admin/includes/db.jsp" %>
 
 			<%
-
-			String driverName = "com.mysql.cj.jdbc.Driver";
-			String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_management_system";
-			String userId = "root";
-			String password = "";
-
-			try {
-			Class.forName(driverName);
-			}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			}
-
-			Connection connection = null;
-			Statement statement = null;
-			ResultSet resultSet = null;
 			
 			try{
 				connection = DriverManager.getConnection(connectionUrl, userId, password);

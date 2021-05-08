@@ -3,28 +3,8 @@
 <% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("painter")){ %>  
 <div class="container-fluid bg">
 <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='painterUI.jsp'">Back</button>
-     		<%@page import="java.sql.DriverManager"%>
-			<%@page import="java.sql.ResultSet"%>
-			<%@page import="java.sql.Statement"%>
-			<%@page import="java.sql.Connection"%>
-
-			<%
-
-			String driverName = "com.mysql.cj.jdbc.Driver";
-			String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_management_system";
-			String userId = "root";
-			String password = "";
-
-			try {
-			Class.forName(driverName);
-			}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			}
-
-			Connection connection = null;
-			Statement statement = null;
-			ResultSet resultSet = null;
-			%>
+     		
+     		<%@ include file="/admin/includes/db.jsp" %>
 			
 			<h1 style="text-align: center;"> List of Complaints Done By <%=session.getAttribute("USER_FIRSTNAME") %> </h1>
 			<table class="table table-bordered table-hover">

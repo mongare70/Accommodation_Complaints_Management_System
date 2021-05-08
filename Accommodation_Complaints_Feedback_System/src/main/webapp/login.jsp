@@ -6,8 +6,8 @@
 		Management System</h1>
 	<!-- Form Start -->
 	<br>
-	<form class="form-container" method="post" action="/login"
-		name="login_form" id="login_form" onsubmit="return validateForm()">
+	<form class="form" method="post" action="/login"
+		name="login_form" id="login_form" autocomplete="off" onsubmit="return validateForm()">
 
 		<div class="form-group">
 			<label for="category">User Role:</label> <select class="form-control"
@@ -27,14 +27,12 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="username">Username:</label> <input type="text"
-				class="form-control" name="username" id="username"
-				placeholder="Username">
+			<label for="username">Username:</label> 
+			<input type="text" class="form-control" name="username" id="username" placeholder="Username">
 		</div>
 		<div class="form-group">
-			<label for="password">Password:</label> <input type="password"
-				class="form-control" name="password" id="password"
-				placeholder="Password">
+			<label for="password">Password:</label> 
+			<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 		</div>
 		<button type="submit" class="btn btn-success btn-block">Login</button>
 	</form>

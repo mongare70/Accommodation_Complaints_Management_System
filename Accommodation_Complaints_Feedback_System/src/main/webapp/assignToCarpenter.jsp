@@ -3,11 +3,6 @@
 
 <% if(session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("custodian")){ %> 
 
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-
     <div class="container-fluid bg">
     <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='/custodianUI.jsp'">Back</button>
     <br>
@@ -26,21 +21,9 @@
 			            <!-- Default -->
 			            <option value="">Select Carpenter</option>
 			            
+			            <%@ include file="/admin/includes/db.jsp" %>
+			            
 			            <%
-							String driverName = "com.mysql.cj.jdbc.Driver";
-							String connectionUrl = "jdbc:mysql://localhost:3306/accommodation_complaints_management_system";
-							String userId = "root";
-							String password = "";
-				
-							try {
-							Class.forName(driverName);
-							}catch (ClassNotFoundException e) {
-							e.printStackTrace();
-							}
-				
-							Connection connection = null;
-							Statement statement = null;
-							ResultSet resultSet = null;
 							
 							try{
 								connection = DriverManager.getConnection(connectionUrl, userId, password);
