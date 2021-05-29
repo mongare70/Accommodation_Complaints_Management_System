@@ -1,42 +1,54 @@
 <%@ include file="/includes/header.jsp"%>
-<%@ include file="/includes/navigation.jsp"%>
 
-<div class="container">
-	<h1 style="text-align: center;">Accommodation Complaints
-		Management System</h1>
-	<!-- Form Start -->
-	<br>
-	<form class="form" method="post" action="/login"
-		name="login_form" id="login_form" autocomplete="off" onsubmit="return validateForm()">
+<div class="container-fluid bg">
+	
+	<div class="login">
+		
+		<img src='images/egerlogo.jpg' alt='logo' class="logo" width="250px" height="100px">
+		
+		<br>
+		
+		<h3 class="title">Accommodation Complaints Management System</h3>
+		
+		<form class="form" method="post" action="/login"
+			name="login_form" id="login_form" autocomplete="off" onsubmit="return validateForm()">
+			
+			<div class="form-group">
+				<label for="category">User Role:</label> <select class="form-control"
+					id="user_role" name="user_role">
+					<option value="admin">Admin</option>
+					<option value="student">Student</option>
+					<option value="halls_officer">Halls Officer</option>
+					<option value="custodian">Custodian</option>
+					<option value="mason">Mason</option>
+					<option value="carpenter">Carpenter</option>
+					<option value="security">Security</option>
+					<option value="plumber">Plumber</option>
+					<option value="electrician">Electrician</option>
+					<option value="cleaner">Cleaner</option>
+					<option value="health">Health</option>
+					<option value="painter">Painter</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="username">Username:</label> 
+				<input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			
+			<div class="form-group">
+				<label for="password">Password:</label> 
+				<input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
+			</div>
+			
+			<button type="submit" class="btn btn-success btn-block">Login</button>
+		
+		</form>
+		<!-- Form End-->
+	
+	</div>
 
-		<div class="form-group">
-			<label for="category">User Role:</label> <select class="form-control"
-				id="user_role" name="user_role">
-				<option value="admin">Admin</option>
-				<option value="student">Student</option>
-				<option value="halls_officer">Halls Officer</option>
-				<option value="custodian">Custodian</option>
-				<option value="mason">Mason</option>
-				<option value="carpenter">Carpenter</option>
-				<option value="security">Security</option>
-				<option value="plumber">Plumber</option>
-				<option value="electrician">Electrician</option>
-				<option value="cleaner">Cleaner</option>
-				<option value="health">Health</option>
-				<option value="painter">Painter</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="username">Username:</label> 
-			<input type="text" class="form-control" name="username" id="username" placeholder="Username">
-		</div>
-		<div class="form-group">
-			<label for="password">Password:</label> 
-			<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-		</div>
-		<button type="submit" class="btn btn-success btn-block">Login</button>
-	</form>
-	<!-- Form End-->
 </div>
 
 <script type="text/javascript">
@@ -59,4 +71,5 @@
 		return true;
 	}
 </script>
+
 <%@ include file="/includes/footer.jsp"%>
