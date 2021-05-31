@@ -14,8 +14,8 @@
 			name="login_form" id="login_form" autocomplete="off" onsubmit="return validateForm()">
 			
 			<div class="form-group">
-				<label for="category">User Role:</label> <select class="form-control"
-					id="user_role" name="user_role">
+				<label for="category">User Role:</label> 
+				<select class="form-control" id="user_role" name="user_role">
 					<option value="admin">Admin</option>
 					<option value="student">Student</option>
 					<option value="halls_officer">Halls Officer</option>
@@ -34,7 +34,6 @@
 			<div class="form-group">
 				<label for="username">Username:</label> 
 				<input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
-				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			</div>
 			
 			<div class="form-group">

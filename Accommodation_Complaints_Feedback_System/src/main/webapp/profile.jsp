@@ -3,7 +3,7 @@
 
 	
 <div class="container-fluid bg">
-		<div class="container">
+		<div class="forms">
 			<!-- Form Start -->
             <form class="form-container" method="post" action="/update_user" name="user_profile" id="user_profile" onsubmit="return validateForm()">
                 <h1>User Profile</h1>
@@ -98,47 +98,47 @@
                 <% String user_role = resultSet.getString("user_role");
                 if( user_role.equals("student")){
                 	%>
-                	 <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/studentUI.jsp'">Go to the Student Homepage</button>
+                	 <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/studentUI.jsp'">Go to the Student Homepage</button>
                 	<%
                 } else if (user_role.equals("halls_officer")){
                 	 %>
-                <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/hallsOfficerUI.jsp'">Go to the Halls Officer Homepage</button>
+                <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/hallsOfficerUI.jsp'">Go to the Halls Officer Homepage</button>
                 <%
                 } else if (user_role.equals("custodian")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/custodianUI.jsp'">Go to the Custodian Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/custodianUI.jsp'">Go to the Custodian Homepage</button>
                 <%
                 } else if (user_role.equals("plumber")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/plumberUI.jsp'">Go to the Plumber Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/plumberUI.jsp'">Go to the Plumber Homepage</button>
                 <%
                 } else if (user_role.equals("mason")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/masonUI.jsp'">Go to the Mason Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/masonUI.jsp'">Go to the Mason Homepage</button>
                 <%
                 } else if (user_role.equals("carpenter")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/carpenterUI.jsp'">Go to the Carpenter Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/carpenterUI.jsp'">Go to the Carpenter Homepage</button>
                 <%
                 } else if (user_role.equals("electrician")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/electricianUI.jsp'">Go to the Electrician Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/electricianUI.jsp'">Go to the Electrician Homepage</button>
                 <%
                 } else if (user_role.equals("security")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/securityUI.jsp'">Go to the Security Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/securityUI.jsp'">Go to the Security Homepage</button>
                 <%
                 } else if (user_role.equals("cleaner")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/cleanerUI.jsp'">Go to the Cleaner Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/cleanerUI.jsp'">Go to the Cleaner Homepage</button>
                 <%
                 } else if (user_role.equals("health")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/healthUI.jsp'">Go to the Health Officer Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/healthUI.jsp'">Go to the Health Officer Homepage</button>
                 <%
                 } else if (user_role.equals("painter")){
                	 %>
-               <button type="button" class="btn btn-danger btn-block" onClick="window.location.href='/painterUI.jsp'">Go to the Painter Homepage</button>
+               <button type="button" class="btn btn-primary btn-block" onClick="window.location.href='/painterUI.jsp'">Go to the Painter Homepage</button>
                 <%
                 }
                 %>
