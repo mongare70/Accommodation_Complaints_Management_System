@@ -4,14 +4,15 @@
 if (session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("custodian")) {
 %>
 <div class="container-fluid bg">
+<br>
 	<button type="button" class="btn btn-primary btn-lg"
 		onClick="window.location.href='/users.jsp'">Back</button>
-	<br>
+
 	<div class="container">
+		<div class="forms">
 		<!-- Form Start -->
-		<form class="form-container" method="post" action="/submitReport"
+		<form class="form-container" method="post" action="/reportStudent"
 			id="reportForm" name="reportForm" onsubmit="return formValidate()">
-			<br>
 			<h1>Report Student Form</h1>
 			<div class="form-group">
 				<label for="student_id">Student ID:</label> <input type="number"
@@ -36,6 +37,7 @@ if (session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE")
 			<button type="submit" class="btn btn-success btn-block">Submit</button>
 		</form>
 		<!-- Form End-->
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

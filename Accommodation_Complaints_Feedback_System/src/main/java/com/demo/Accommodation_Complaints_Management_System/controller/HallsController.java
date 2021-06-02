@@ -698,7 +698,7 @@ public class HallsController {
 		return "redirect:/studentUI.jsp";
 	}
 
-	@PostMapping("/submitReport")
+	@PostMapping("/reportStudent")
 	public String submitReport(@RequestParam String report_title, @RequestParam String report_content,
 			@RequestParam int report_author_id, @RequestParam int student_id) {
 		Report report = new Report();
@@ -708,7 +708,7 @@ public class HallsController {
 		report.setReport_author_id(report_author_id);
 
 		service.saveReport(report);
-		return "redirect:/reports.jsp";
+		return "redirect:/reportedStudents.jsp";
 	}
 
 	// approve complaint

@@ -7,9 +7,10 @@
     <button type="button" class="btn btn-primary btn-lg" onClick="window.location.href='/custodianUI.jsp'">Back</button>
     <br>
 		<div class="container">
-				<!-- Form Start -->
+		
+		<div class="forms">
+			<!-- Form Start -->
             <form class="form-container" method="post" action="/assignToWorker" id="assigningForm" name="assigningForm" onsubmit="return formValidate()">
-                <br>
                 <h1>Complaint Assigning Form</h1>
                	<div class="form-group">
                    	<label for="complaint_id">Complaint ID:</label>
@@ -50,6 +51,7 @@
                   <button type="submit" class="btn btn-success btn-block">Assign</button>
             </form>
             <!-- Form End-->
+            </div>
 		</div>
 	</div>
 	<script type="text/javascript">

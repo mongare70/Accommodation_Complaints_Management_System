@@ -5,9 +5,12 @@
 			<div class="border-end bg-white" id="sidebar-wrapper">
 				<div class="sidebar-heading border-bottom bg-light">ACMS</div>
 			    <div class="list-group list-group-flush">
-			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/studentDashboard.jsp">Dashboard</a>
-			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/studentUI.jsp"> Submit Complaint</a>
-			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="statusUI.jsp"> Complaint Status</a>
+			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/custodianDashboard.jsp">Dashboard</a>
+					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/custodianWorkspace.jsp">Custodian Workspace</a>
+			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/custodianUI.jsp">Assign Complaints</a>
+			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/assignedComplaints.jsp">Assigned Complaints</a>
+			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/users.jsp">Report Student</a>
+			        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/reportedStudents.jsp">Reported Students</a>
 			    </div>
 			</div>
             
@@ -18,7 +21,7 @@
                	<%@ include file="/includes/navigation.jsp"%>
                
                	<%
-					if (session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("student")) {
+					if (session.getAttribute("USER_ID") != null && session.getAttribute("USER_ROLE").equals("custodian")) {
 				%>
                
                 <!-- Page content-->
@@ -41,12 +44,8 @@
             </div>
         </div>
         
-		<%
-		} else {
-		%>
-		<h1>You need to login as Student first to access this page</h1>
-		<%
-		}
-		%>
+		<% } else { %>
+			<h1>You need to login as Custodian first to access this page</h1>
+		<% } %>
         
 <%@ include file="/includes/footer.jsp"%>
